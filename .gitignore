@@ -33,3 +33,7 @@ junit-pytest.xml
 
 # virtual environment
 .venv/
+
+
+# raw data so we don't commit a ton of data to the repo
+data/raw
