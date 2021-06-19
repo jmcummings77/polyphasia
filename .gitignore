@@ -1,0 +1,35 @@
+# Byte-compiled
+__pycache__/
+*.pyc
+
+# Distribution / packaging
+packaging/build
+packaging/dist
+packaging/cookiecutter_model
+packaging/*.egg-info
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+testing_framework/*.xml
+*.cover
+.pytest_cache/
+junit-pytest.xml
+
+# pyenv
+.python-version
+
+# mypy
+.mypy_cache/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+
+# Pycharm
+.idea/
+
+# virtual environment
+.venv/

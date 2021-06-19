@@ -1,0 +1,20 @@
+[flake8]
+max-line-length = 92
+ignore =
+  # Ignore line length and spacing errors, since the black package is in charge of this.
+  E501, W503
+per-file-ignores =
+    # W391: empty file, F401: imported but unused
+    __init__.py: W391, F401
+exclude =
+    .git
+    __pycache__
+    build
+    dist
+    .idea
+    .venv
+    .tox
+    .mypy_cache
+    .pytest_cache
+    .vscode
+    .github

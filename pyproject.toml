@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "polyphasia"
+version = "0.1.0"
+description = "WordNet dataset EDA package."
+authors = ["John-Michael Cummings <JMCummings77@gmail.com>"]
+repository = "https://github.com/jmcummings77/polyphasia.git.git"
+readme = "README.md"
+include = [ "changelog.md","LICENSE", 'README-DEV.md']
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pyarrow = "^3.0.0"
+pandas = "1.1.5"
+PyYAML = "^5.4.1"
+confuse = "^1.4.0"
+
+[tool.poetry.dev-dependencies]
+pytest-mock = "^3.6.1"
+pytest-faker = "^2.0.0"
+black = "^21.6b0"
+pre-commit = "^2.13.0"
+
+[tool.black]
+# The regular expression pattern must be written as a single line;
+# otherwise pytest-black fails to exclude the folders. For details see
+# https://github.com/shopkeep/pytest-black/issues/36
+exclude = '(/(\.git|packaging|testing_framework|.venv|snapshots$|tests/data$)/)'
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"

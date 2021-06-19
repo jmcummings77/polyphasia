@@ -1,0 +1,37 @@
+# This file is used by the PyTest package when tests are run. It's purpose is to ignore any
+# intentionally uncovered files so that coverage can be an easily verifiable 100%
+# From http://erik.io/blog/2014/09/11/why-and-how-test-coverage-100/
+[report]
+exclude_lines =
+  pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __unicode__
+    def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run:
+    if 0:
+    if __name__ == .__main__.:
+    @abc.abstractmethod
+    __all__
+
+omit =
+    */__init__.py
+    */tests/*
+    testing_framework/*
+    .venv/*
+    # Ignore the main file and test client.
+    polyphasia/serve_model.py
+    random_client.py
+    # Ignore the batch runner main file.
+    polyphasia/run_model_batched.py
+    # Ignore the logging boilerplate.
+    polyphasia/logger.py
+    # Ignore the Jupyter config file.
+    jupyter_notebook_config.py
+    smoke_test_debug.py
