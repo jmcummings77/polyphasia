@@ -37,3 +37,4 @@ junit-pytest.xml
 
 # raw data so we don't commit a ton of data to the repo
 data/raw
+data/processed
