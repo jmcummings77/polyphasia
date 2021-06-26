@@ -58,4 +58,4 @@ The source data also includes a handful of malformed values, which should be dro
 - [ ] Add tests to classes
 - [ ] Improve logging
 - [ ] Set up infrastructure to run on server instead of abusing my laptop
-
+- [ ] Clean up CI/CD infrastructure so it actually runs the tests, linting, and precommit hooks
