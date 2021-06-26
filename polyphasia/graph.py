@@ -1,15 +1,14 @@
 import networkx as nx
-from polyphasia.loader import DataSet, Edge
+from polyphasia.schema import WordGraphEdgeList, Relationship
 from typing import Optional, List
-from networkx.algorithms.dag import is_directed_acyclic_graph
+from networkx.algorithms.dag import is_directed_acyclic_graph, dag_longest_path
 from networkx.algorithms.cycles import simple_cycles
-from networkx.algorithms.dag import dag_longest_path
 
 
 class GraphAnalysis:
     def __init__(
         self,
-        data_set: Optional[DataSet] = None,
+        data_set: Optional[WordGraphEdgeList] = None,
         limit_to_from_root_relationships: Optional[bool] = False,
     ):
         """
@@ -20,7 +19,7 @@ class GraphAnalysis:
         :type limit_to_from_root_relationships:
         """
         if data_set is None:
-            data_set = DataSet()
+            data_set = WordGraphEdgeList()
         if not data_set.loaded:
             data_set.load(limit_to_from_root_relationships)
         self.graph = nx.from_edgelist(data_set.edge_list, nx.DiGraph)
@@ -63,7 +62,7 @@ class GraphAnalysis:
         ]
         self.graph.remove_nodes_from(cycle_nodes)
 
-    def longest_path(self) -> List[Edge]:
+    def longest_path(self) -> List[Relationship]:
         """
 
         :return:
@@ -93,7 +92,7 @@ class GraphAnalysis:
         )
         return english_graph
 
-    def highest_degree_nodes(self, count: int) -> List[Edge]:
+    def highest_degree_nodes(self, count: int) -> List[Relationship]:
         """
 
         :param count:
