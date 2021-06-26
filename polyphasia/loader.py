@@ -1,211 +1,103 @@
-from dataclasses import dataclass, field
-from typing import Optional, List, Dict
+"""Module with functions for loading and cleaning the source data"""
+
+from typing import Optional
 from pathlib import Path
 
 import pandas as pd
 
-from enum import Enum
+from polyphasia.constants import (
+    EdgeDirections,
+    ParsedColumnNames,
+    SourceColumnNames,
+    LANGUAGE_PREFIX_TAG,
+    EDGE_LIST_COLUMN_NAMES,
+    RELATIVE_PATH_TO_SOURCE,
+    INVALID_RELATIONSHIP_TYPE_MAP,
+    RELATIONSHIP_TYPE_DIRECTION_MAP,
+)
 
 
-class EdgeDirections(Enum):
-    """ """
-
-    BIDIRECTIONAL = "BIDIRECTIONAL"
-    FROM_ROOT = "FROM_ROOT"
-    FROM_LEAF = "FROM_LEAF"
-
-
-class RelationshipTypes(Enum):
-    """ """
-
-    ETYMOLOGY = "rel:etymology"
-    ETYMOLOGICAL_ORIGIN_OF = "rel:etymological_origin_of"
-    IS_DERIVED_FROM = "rel:is_derived_from"
-    HAS_DERIVED_FORM = "rel:has_derived_form"
-    ETYMOLOGICALLY_RELATED = "rel:etymologically_related"
-    VARIANT_ORTHOGRAPHY = "rel:variant:orthography"
+def load_to_pandas(source_file: Optional[Path] = None) -> pd.DataFrame:
+    """
+    Parses the provided TSV file to a pandas DataFrame
+    :param source_file: the TSV file from which to load the data
+    :type source_file: Optional[Path]
+    :return: a data frame with the three TSV columns loaded
+    :rtype: pd.DataFrame
+    """
+    if source_file is None:
+        source_file = Path.cwd().parent.absolute() / RELATIVE_PATH_TO_SOURCE
+    data_frame = pd.read_csv(source_file, sep="\t", names=EDGE_LIST_COLUMN_NAMES)
+    return data_frame
 
 
-class InvalidRelationshipTypes(Enum):
-    """ """
+def clean_data_frame(
+    data_frame: pd.DataFrame, drop_rel_types: Optional[bool] = True
+) -> pd.DataFrame:
+    """
+    # Cleaning notes
 
-    ETYMOLOGICALLY = "rel:etymologically"
-    DERIVED = "rel:derived"
+    ## Relationship types found in source data
 
+    Relationships are recorded bidirectionally. So a root word will link to its derivatives, and each derivative will link back to the root. To simplify the
+    graph, I will drop edges that point from derivatives to roots, since that information is already encoded in the root-to-leaf edge and networkx can handle
+    bidirectional traversal without requiring multiple edges to link the same pair of nodes.
 
-VALID_RELATIONSHIP_TYPES_LIST = [rel_type.value for rel_type in RelationshipTypes]
-INVALID_RELATIONSHIP_TYPES_LIST = [
-    rel_type.value for rel_type in InvalidRelationshipTypes
-]
-
-RELATIONSHIP_TYPE_DIRECTION_MAP = {
-    EdgeDirections.BIDIRECTIONAL: [
-        RelationshipTypes.ETYMOLOGICALLY_RELATED,
-        RelationshipTypes.VARIANT_ORTHOGRAPHY,
-    ],
-    EdgeDirections.FROM_LEAF: [
-        RelationshipTypes.ETYMOLOGY,
-        RelationshipTypes.IS_DERIVED_FROM,
-    ],
-    EdgeDirections.FROM_ROOT: [
-        RelationshipTypes.ETYMOLOGICAL_ORIGIN_OF,
-        RelationshipTypes.HAS_DERIVED_FORM,
-    ],
-}
-
-INVALID_RELATIONSHIP_TYPE_MAP = {
-    InvalidRelationshipTypes.ETYMOLOGICALLY: RelationshipTypes.ETYMOLOGICALLY_RELATED,
-    InvalidRelationshipTypes.DERIVED: RelationshipTypes.IS_DERIVED_FROM,
-}
+    Below are the types of relationships extracted from the data, with comments indicating their directionality.
 
 
-@dataclass
-class WordNode:
-    """ """
+    <- A is the source of B
 
-    value: str = ""
-    language: str = ""
-
-    @property
-    def node_id(self) -> str:
-        return f"{self.language}: {self.value}"
+    -> B is the source of A
 
 
-@dataclass
-class Edge:
-    """ """
+    - "rel:etymology"               ->
+    - "rel:etymological_origin_of"  <-
+    - "rel:is_derived_from"         ->
+    - "rel:has_derived_form"        <-
+    - "rel:etymologically_related"  <->
+    - "rel:variant:orthography"     <->
 
-    relationship_type: RelationshipTypes = RelationshipTypes.ETYMOLOGICAL_ORIGIN_OF
-    source_node: WordNode = field(default_factory=WordNode)
-    target_node: WordNode = field(default_factory=WordNode)
+    source data also includes a handful of malformed values, which should be dropped or replaced
+    - "rel:etymologically" -> "rel:etymologically_related"
+    - "rel:derived" -> "rel:is_derived_from"
 
 
-class DataSet:
-    def __init__(self, source_file: Optional[Path] = None):
-        """
 
-        :param source_file:
-        :type source_file:
-        """
-        if source_file == None:
-            base_directory = Path.cwd().parent.absolute()
-            source_data_path = base_directory / "data" / "raw" / "etymwn.tsv"
-            source_file = source_data_path
-        self._source_file: Path = source_file
-        self._data: Dict[str, WordNode] = {}
-        self.edge_list: List[Edge] = []
-        self.loaded: bool = False
+    :param data_frame: the data frame to clean
+    :type data_frame: pd.DataFrame
+    :param drop_rel_types: flag indicating whether to drop edges that have unwanted directionality for the analysis
+    :type drop_rel_types: bool
+    :return: a cleaned DataFrame with additional columns for the parsed target and source words and languages
+    :rtype: pd.DataFrame
+    """
 
-    def load(self, limit_to_from_root_relationships: Optional[bool] = False) -> None:
-        """
-
-        :param limit_to_from_root_relationships:
-        :type limit_to_from_root_relationships:
-        :return:
-        :rtype:
-        """
-        data_frame = pd.read_csv(self._source_file, sep="\t")
-        if limit_to_from_root_relationships:
-            data_frame.apply(self._parse_root_only, index=1)
-        else:
-            data_frame.apply(self._parse, index=1)
-        self.loaded = True
-
-    def _parse(self, source_node: str, edge_type: str, target_node: str) -> None:
-        """
-
-        :param source_node:
-        :type source_node:
-        :param edge_type:
-        :type edge_type:
-        :param target_node:
-        :type target_node:
-        :return:
-        :rtype:
-        """
-        self._parse_input_row(source_node, edge_type, target_node, False)
-
-    def _parse_root_only(
-        self, source_node: str, edge_type: str, target_node: str
-    ) -> None:
-        """
-
-        :param source_node:
-        :type source_node:
-        :param edge_type:
-        :type edge_type:
-        :param target_node:
-        :type target_node:
-        :return:
-        :rtype:
-        """
-        self._parse_input_row(source_node, edge_type, target_node, True)
-
-    def _parse_node(self, node: str) -> WordNode:
-        """
-
-        :param node:
-        :type node:
-        :return:
-        :rtype:
-        """
-        if node not in self._data:
-            source_node_content = node.split(": ")
-            word = WordNode(source_node_content[0], source_node_content[1])
-            self._data[node] = word
-        return self._data[node]
-
-    @staticmethod
-    def _parse_edge(edge_type: str) -> RelationshipTypes:
-        """
-
-        :param edge_type:
-        :type edge_type:
-        :return:
-        :rtype:
-        """
-        if edge_type in VALID_RELATIONSHIP_TYPES_LIST:
-            parsed_edge_type = RelationshipTypes[edge_type]
-        elif edge_type in INVALID_RELATIONSHIP_TYPES_LIST:
-            parsed_edge_type = INVALID_RELATIONSHIP_TYPE_MAP[edge_type]
-        else:
-            raise ValueError(
-                f"Relationship type not found in list of valid or cleanable relationships. Valid relationships: {VALID_RELATIONSHIP_TYPES_LIST}. Invalid: {INVALID_RELATIONSHIP_TYPES_LIST}"
-            )
-        return parsed_edge_type
-
-    def _parse_input_row(
-        self,
-        source_node: str,
-        edge_type: str,
-        target_node: str,
-        limit_to_from_root: bool,
-    ):
-        """
-
-        :param source_node:
-        :type source_node:
-        :param edge_type:
-        :type edge_type:
-        :param target_node:
-        :type target_node:
-        :param limit_to_from_root:
-        :type limit_to_from_root:
-        :return:
-        :rtype:
-        """
-        source = self._parse_node(source_node)
-        target = self._parse_node(target_node)
-        parsed_edge_type = DataSet._parse_edge(edge_type)
-        if (
-            not limit_to_from_root
-            or RELATIONSHIP_TYPE_DIRECTION_MAP[parsed_edge_type]
-            == EdgeDirections.FROM_ROOT
-        ):
-            self.edge_list.append(
-                Edge(
-                    source_node=source,
-                    target_node=target,
-                    relationship_type=parsed_edge_type,
+    if drop_rel_types:
+        from_root_relationships = RELATIONSHIP_TYPE_DIRECTION_MAP[
+            EdgeDirections.FROM_ROOT
+        ]
+        data_frame = data_frame.loc[
+            (
+                data_frame[SourceColumnNames.EDGE_TYPE.value].isin(
+                    from_root_relationships
                 )
             )
+        ]
+    else:
+        for rel_type, valid_value in INVALID_RELATIONSHIP_TYPE_MAP:
+            data_frame = data_frame.replace(rel_type, valid_value)
+    data_frame[
+        [ParsedColumnNames.SOURCE_LANGUAGE.value, ParsedColumnNames.SOURCE_WORD.value]
+    ] = data_frame.source_node.str.split(LANGUAGE_PREFIX_TAG, expand=True)
+
+    # there are a handful of nodes that include strange characters or a :Category: tag that introduces a third
+    # column for no reason. This data is uninteresting so we can just ignore it and no include it in the graph when we construct it
+    data_frame[
+        [
+            ParsedColumnNames.TARGET_LANGUAGE.value,
+            ParsedColumnNames.TARGET_WORD.value,
+            "_",
+        ]
+    ] = data_frame.target_node.str.split(LANGUAGE_PREFIX_TAG, expand=True)
+    data_frame.drop(["_"], axis=1)
+    return data_frame

@@ -49,3 +49,13 @@ The source data also includes a handful of malformed values, which should be dro
 | ----------- | ----------- |
 | "rel:etymologically" | "rel:etymologically_related" |
 | "rel:derived" | "rel:is_derived_from" |
+
+## TODO
+
+- [ ] Investigate difference between BFS and DAG approaches to filtering graph to English-related nodes
+- [ ] Improve pipeline for loading data into Neo4j
+- [ ] Improve visualizations
+- [ ] Add tests to classes
+- [ ] Improve logging
+- [ ] Set up infrastructure to run on server instead of abusing my laptop
+

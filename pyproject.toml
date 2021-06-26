@@ -18,6 +18,7 @@ matplotlib = "^3.4.2"
 jupyter = "^1.0.0"
 scipy = "^1.6.3"
 pydot = "^1.4.2"
+importlib-metadata = "^4.5.0"
 
 [tool.poetry.dev-dependencies]
 pytest-mock = "^3.6.1"
