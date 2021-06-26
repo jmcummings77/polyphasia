@@ -52,7 +52,7 @@ The source data also includes a handful of malformed values, which should be dro
 
 ## TODO
 
-- [ ] Investigate difference between BFS and DAG approaches to filtering graph to English-related nodes
+- [x] Investigate difference between BFS and DAG approaches to filtering graph to English-related nodes
 - [ ] Improve pipeline for loading data into Neo4j
 - [ ] Improve visualizations
 - [ ] Add tests to classes
