@@ -1,6 +1,6 @@
 from enum import Enum
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
 
 
 class EdgeDirections(Enum):

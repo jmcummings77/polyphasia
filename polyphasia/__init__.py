@@ -1,6 +1,7 @@
 """ Top-level package for polyphasia. """
-import importlib_metadata as metadata
+
+from importlib import metadata
 
 __metadata__ = metadata.metadata(__name__)
-__author__ = __metadata__["Author"]
-__version__ = __metadata__["Version"]
+__author__ = __metadata__.get("Author", "")
+__version__ = __metadata__.get("Version", "")

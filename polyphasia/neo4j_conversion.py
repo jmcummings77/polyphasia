@@ -10,11 +10,10 @@ to identify interesting subgraphs, and label the constituent nodes accordingly s
 In the mean time, I will commit this terrible code so I can revisit later.
 """
 
+import csv
 from pathlib import Path
 
 import pandas as pd
-import csv
-
 
 """
 Load data from file

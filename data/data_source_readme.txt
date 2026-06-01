@@ -5,7 +5,7 @@ http://icsi.berkeley.edu/~demelo/etymwn/
 
 == DESCRIPTION ==
 
-The Etymological Wordnet project provides information about how words in different languages 
+The Etymological Wordnet project provides information about how words in different languages
 are etymologically related. The information is mostly mined from the English version of
 Wiktionary, but also contains a number of manual additions.
 

@@ -4,4 +4,4 @@
 
 set -e
 
-coverage run --source=polyphasia -m pytest --quiet && coverage report
+python -m pytest -c testing_framework/pytest.ini --quiet polyphasia

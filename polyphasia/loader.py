@@ -1,19 +1,19 @@
 """Module with functions for loading and cleaning the source data"""
 
-from typing import Optional
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 
 from polyphasia.constants import (
+    EDGE_LIST_COLUMN_NAMES,
+    INVALID_RELATIONSHIP_TYPE_MAP,
+    LANGUAGE_PREFIX_TAG,
+    RELATIONSHIP_TYPE_DIRECTION_MAP,
+    RELATIVE_PATH_TO_SOURCE,
     EdgeDirections,
     ParsedColumnNames,
     SourceColumnNames,
-    LANGUAGE_PREFIX_TAG,
-    EDGE_LIST_COLUMN_NAMES,
-    RELATIVE_PATH_TO_SOURCE,
-    INVALID_RELATIONSHIP_TYPE_MAP,
-    RELATIONSHIP_TYPE_DIRECTION_MAP,
 )
 
 
@@ -84,7 +84,7 @@ def clean_data_frame(
             )
         ]
     else:
-        for rel_type, valid_value in INVALID_RELATIONSHIP_TYPE_MAP:
+        for rel_type, valid_value in INVALID_RELATIONSHIP_TYPE_MAP.items():
             data_frame = data_frame.replace(rel_type, valid_value)
     data_frame[
         [ParsedColumnNames.SOURCE_LANGUAGE.value, ParsedColumnNames.SOURCE_WORD.value]
@@ -99,5 +99,5 @@ def clean_data_frame(
             "_",
         ]
     ] = data_frame.target_node.str.split(LANGUAGE_PREFIX_TAG, expand=True)
-    data_frame.drop(["_"], axis=1)
+    data_frame = data_frame.drop(["_"], axis=1)
     return data_frame

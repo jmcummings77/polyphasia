@@ -1,14 +1,15 @@
 """Module with graph classes that mostly wrap networkx logic to provide more reusable/testable logic for use in the notebooks"""
 
-from typing import Optional, List, Any
-from pandas import DataFrame
-from polyphasia.constants import EDGE_ATTRIBUTES, SourceColumnNames
+from typing import Any, List, Optional, Set
+
 import networkx as nx
-from networkx.algorithms.dag import is_directed_acyclic_graph
-from networkx.algorithms.cycles import simple_cycles
-from networkx.algorithms.dag import dag_longest_path
 from networkx.algorithms.components import connected_components
+from networkx.algorithms.cycles import simple_cycles
+from networkx.algorithms.dag import dag_longest_path, is_directed_acyclic_graph
 from networkx.algorithms.traversal import bfs_tree
+from pandas import DataFrame
+
+from polyphasia.constants import EDGE_ATTRIBUTES, SourceColumnNames
 
 
 class DirectedGraph:
@@ -34,7 +35,7 @@ class DirectedGraph:
         :return: Summary info about the graph
         :rtype: str
         """
-        return nx.info(self._nx_digraph)
+        return str(self._nx_digraph)
 
     @property
     def is_dag(self) -> bool:
@@ -88,7 +89,7 @@ class DirectedGraph:
 
     def language_nodes(
         self, language: Optional[str] = "eng", roots: Optional[List[Any]] = None
-    ):
+    ) -> List[Set[Any]]:
         """
         Find the nodes pertaining to the language provided
         :param language: the prefix string for the language
@@ -112,8 +113,8 @@ class DirectedGraph:
         return nodes
 
     def language_subgraph(
-        self, language: Optional[str] = "eng", nodes: Optional[List[Any]] = None
-    ):
+        self, language: Optional[str] = "eng", nodes: Optional[List[Set[Any]]] = None
+    ) -> Any:
         """
         Get the subgraph with nodes pertaining to a specific language.
 
@@ -131,7 +132,7 @@ class DirectedGraph:
         return graph
 
     @staticmethod
-    def nodes_by_degree(subgraph) -> List[Any]:
+    def nodes_by_degree(subgraph: Any) -> List[Any]:
         """
         Return a list of nodes in the specified subgraph, sorted in decreasing order by degree
         :param subgraph: the subgraph to sort
@@ -143,14 +144,14 @@ class DirectedGraph:
         return nodes
 
     @staticmethod
-    def subgraph_info(subgraph) -> str:
+    def subgraph_info(subgraph: Any) -> str:
         """
         Gets summary info about the subgraph including number of nodes and edges
 
         :return: Summary info about the graph
         :rtype: str
         """
-        return nx.info(subgraph)
+        return str(subgraph)
 
 
 class UndirectedGraph:
@@ -176,7 +177,7 @@ class UndirectedGraph:
         :return: Summary info about the graph
         :rtype: str
         """
-        return nx.info(self._nx_graph)
+        return str(self._nx_graph)
 
     @property
     def connected_components(self) -> List[List[Any]]:
@@ -188,7 +189,7 @@ class UndirectedGraph:
         conn_components = list(connected_components(self._nx_graph))
         return conn_components
 
-    def language_nodes(self, language: Optional[str] = "eng"):
+    def language_nodes(self, language: Optional[str] = "eng") -> List[Any]:
         """
         Find the nodes pertaining to the language provided
         :param language: the prefix string for the language
@@ -201,7 +202,7 @@ class UndirectedGraph:
 
     def language_subgraph(
         self, language: Optional[str] = "eng", nodes: Optional[List[Any]] = None
-    ):
+    ) -> Any:
         """
         Get the subgraph with nodes pertaining to a specific language.
 
@@ -216,27 +217,24 @@ class UndirectedGraph:
         # grab the nodes that have the eng tag, then build the connected graph by searching outwards from those
         if nodes is None:
             nodes = self.language_nodes(language)
-        bfs_nodes_to_add = []
-        # add nodes inside loop to avoid having to flatten later
-        [
+        bfs_nodes_to_add: List[Any] = []
+        for node in nodes:
             bfs_nodes_to_add.extend(bfs_tree(self._nx_graph, source=node))
-            for node in nodes
-        ]
         bfs_graph = self._nx_graph.subgraph(bfs_nodes_to_add)
         return bfs_graph
 
     @staticmethod
-    def subgraph_info(subgraph) -> str:
+    def subgraph_info(subgraph: Any) -> str:
         """
         Gets summary info about the subgraph including number of nodes and edges
 
         :return: Summary info about the graph
         :rtype: str
         """
-        return nx.info(subgraph)
+        return str(subgraph)
 
     @staticmethod
-    def nodes_by_degree(subgraph) -> List[Any]:
+    def nodes_by_degree(subgraph: Any) -> List[Any]:
         """
         Return a list of nodes in the specified subgraph, sorted in decreasing order by degree
         :param subgraph: the subgraph to sort
