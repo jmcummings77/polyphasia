@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Script for running all tests and reporting coverage.
-# Run from project root.
+# May be called from any working directory.
 
-set -e
+set -euo pipefail
 
-python -m pytest -c testing_framework/pytest.ini --quiet polyphasia
+cd "$(dirname "${BASH_SOURCE[0]}")"
+python -m pytest --cov=polyphasia --cov-report=term-missing "$@"
