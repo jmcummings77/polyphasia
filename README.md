@@ -39,6 +39,7 @@ The sample is synthetic. No dataset download, notebook environment, or database 
 | Guide | What it covers |
 | --- | --- |
 | [Data format and cleaning](docs/data-format.md) | TSV schema, validation, relationship filtering, and aliases |
+| [Data audit and projections](docs/data-audit.md) | Source provenance, assertion preservation, inverse coverage, and cycle diagnostics |
 | [Graph behavior](docs/graph-behavior.md) | Language families, traversal, cycles, and information loss |
 | [Development](docs/README-DEV.md) | Setup, tests, quality checks, and packaging |
 | [Research and notebooks](docs/research.md) | Project background, dataset provenance, notebook setup, and roadmap |

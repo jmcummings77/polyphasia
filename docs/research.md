@@ -38,6 +38,8 @@ Select the `Python 3.12 (polyphasia)` kernel. The loader's default data path is 
 
 ## Research roadmap
 
+- Use the [data audit and explicit projections](data-audit.md) to measure inverse
+  coverage and information loss before interpreting graph results.
 - Validate relationship directionality and information loss from filtering on the full dataset. The current classifications reflect the original analysis, not a complete linguistic model or a guarantee that every reverse relationship exists.
 - Refresh historical visualizations and make the notebooks reproducible end to end.
 - Develop and verify a complete Neo4j import workflow.
