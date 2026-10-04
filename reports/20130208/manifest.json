@@ -1,0 +1,97 @@
+{
+  "artifacts": {
+    "analysis.json": {
+      "bytes": 85971,
+      "sha256": "10dacc2344774e307dd18912b230945b9d86e7c8db4eb8d5388f6f6a39b7d4d5"
+    },
+    "audit.json": {
+      "bytes": 36726,
+      "sha256": "506b83d38edbd7dbbfcd2f5188a1f48b54e2d9f3d45c5aea44dcaae5965e2119"
+    },
+    "figures/query-comparison.png": {
+      "bytes": 36823,
+      "sha256": "5b558dd5ec487528055eb1f7b6dff01739eed4f012c3a413108a8146115b9083"
+    },
+    "figures/rankings.png": {
+      "bytes": 41429,
+      "sha256": "205f1624ce5e65df1e8d0466786b84ecc92607b70cc171ecb764d67ebc5652b3"
+    },
+    "figures/retention.png": {
+      "bytes": 30956,
+      "sha256": "806dc68386bf56219e76de13452780969932f87344a6719fd27401160772b2b0"
+    },
+    "overlaps.csv": {
+      "bytes": 1039,
+      "sha256": "d248dd2b8608cc8cbec4a472546b040b038bc196fbeb0a0cbadbcd2629cecf68"
+    },
+    "queries.csv": {
+      "bytes": 607,
+      "sha256": "1dd4df99d211a34a6c48cf03ff870791bdfab6cdfdb5a2f5ea4e30b929b87251"
+    },
+    "rankings.csv": {
+      "bytes": 5653,
+      "sha256": "34b0262af154b23ff488f08e8b4e0a491c59fb01ad60b3ca9132158145120561"
+    }
+  },
+  "assertion_id_definition": "1-based nonblank parsed record ordinal in input SHA-256",
+  "created_at": "2026-10-04T04:19:10.422620+00:00",
+  "environment": {
+    "matplotlib": "3.9.0",
+    "networkx": "3.3",
+    "numpy": "1.26.0",
+    "pandas": "2.2.0",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "polyphasia": "0.1.0",
+    "python": "3.12.9"
+  },
+  "execution": {
+    "peak_rss_bytes": 3641344000,
+    "scope": "Elapsed workflow through artifact rendering and input/code verification, before manifest writing; RSS is process lifetime high-water including interpreter/imports, not incremental allocation; unsupported RSS platforms report null",
+    "wall_seconds": 254.46139
+  },
+  "git": {
+    "dirty": false,
+    "revision": "43ac9e8b96d3be0c871127f4f7c68594578f6b0a"
+  },
+  "implementation_sha256": {
+    "analysis.py": "69d341a303290c5d39d68df7acc23a6c7edb6d761a08d94bb220a5534f13f09d",
+    "analysis_artifacts.py": "3a1ff4f462b107c2365c65fc21c63e9bdac3022f81250310b7a4547820ac90a2",
+    "analysis_metrics.py": "a01b7152d7c7e19069824e289ff586daabba2d505a9d5d89eeb15146fb26e257",
+    "assertions.py": "f6c27385b0769e059a320a5d8c0606e2895d1f43cbcd680ba555925ac1c691ff",
+    "audit.py": "9869a8307e3dda579a9d9ac30af75a47099ee3ce097901ba3de00ce381fd7173",
+    "constants.py": "4e4945090f61f16fe68d5a9d91a1cb919a811dcf38d62630c4bb3512a9d9c4e5",
+    "loader.py": "77db4f75bd5ae4c4cbb9d8f2fb4264b4c8fa7120f796f7b8c85ab95710ae7984",
+    "queries.py": "5c690469ee8f9406e5a353df97c61bd4af6cb85ed92ec9ad2eddd959cc6d1dcb"
+  },
+  "input": {
+    "bytes": 313273677,
+    "dataset_version": "2013-02-08",
+    "description": null,
+    "kind": "full",
+    "path": "data/raw/etymologies.tsv",
+    "sha256": "361b946fa306732357b3ee375ea01ccdcbe3db1676898c47c39a92fb9861f7da",
+    "source_url": "http://etym.org/etymwn-20130208.zip"
+  },
+  "parameters": {
+    "language": "eng",
+    "policies": [
+      "root_only",
+      "normalized"
+    ],
+    "top_n": 10,
+    "trace_evidence_limit": 5,
+    "trace_max_depth": 8,
+    "trace_max_nodes": 1000,
+    "trace_words": [
+      "eng: examples",
+      "eng: kindness",
+      "p_gem: forana"
+    ]
+  },
+  "policies": {
+    "normalized": "1",
+    "root_only": "1"
+  },
+  "schema_version": 1,
+  "workflow": "analysis"
+}

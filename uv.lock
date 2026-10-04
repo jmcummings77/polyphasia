@@ -1245,6 +1245,9 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+analysis = [
+    { name = "matplotlib" },
+]
 notebooks = [
     { name = "ipykernel" },
     { name = "jupyter" },
@@ -1270,6 +1273,7 @@ dev = [
 requires-dist = [
     { name = "ipykernel", marker = "extra == 'notebooks'", specifier = ">=6.29,<8.0" },
     { name = "jupyter", marker = "extra == 'notebooks'", specifier = ">=1.1,<2.0.0" },
+    { name = "matplotlib", marker = "extra == 'analysis'", specifier = ">=3.9,<4.0.0" },
     { name = "matplotlib", marker = "extra == 'notebooks'", specifier = ">=3.9,<4.0.0" },
     { name = "networkx", specifier = ">=3.3,<4.0.0" },
     { name = "numpy", marker = "extra == 'notebooks'", specifier = ">=1.26,<3.0.0" },

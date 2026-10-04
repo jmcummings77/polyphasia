@@ -1,0 +1,81 @@
+policy,relation,direction,rank,node,language,word,neighbors,affix_like
+root_only,word_origin,out_degree,1,eng: non-,eng,non-,5742,True
+root_only,word_origin,out_degree,2,eng: -ly,eng,-ly,5438,True
+root_only,word_origin,out_degree,3,eng: un-,eng,un-,4203,True
+root_only,word_origin,out_degree,4,eng: -ness,eng,-ness,3295,True
+root_only,word_origin,out_degree,5,eng: -like,eng,-like,2437,True
+root_only,word_origin,out_degree,6,eng: -er,eng,-er,2347,True
+root_only,word_origin,out_degree,7,eng: -less,eng,-less,1912,True
+root_only,word_origin,out_degree,8,eng: -able,eng,-able,1428,True
+root_only,word_origin,out_degree,9,eng: anti-,eng,anti-,1295,True
+root_only,word_origin,out_degree,10,eng: -y,eng,-y,1229,True
+root_only,word_origin,in_degree,1,eng: file,eng,file,5,False
+root_only,word_origin,in_degree,2,eng: radiogram,eng,radiogram,5,False
+root_only,word_origin,in_degree,3,deu: Bauer,deu,Bauer,4,False
+root_only,word_origin,in_degree,4,eng: -er,eng,-er,4,True
+root_only,word_origin,in_degree,5,eng: Albanian,eng,Albanian,4,False
+root_only,word_origin,in_degree,6,eng: Caesarean,eng,Caesarean,4,False
+root_only,word_origin,in_degree,7,eng: a-,eng,a-,4,True
+root_only,word_origin,in_degree,8,eng: abasic,eng,abasic,4,False
+root_only,word_origin,in_degree,9,eng: aspiration,eng,aspiration,4,False
+root_only,word_origin,in_degree,10,eng: atopical,eng,atopical,4,False
+root_only,derivation,out_degree,1,eng: time,eng,time,1289,False
+root_only,derivation,out_degree,2,eng: poly-,eng,poly-,902,True
+root_only,derivation,out_degree,3,eng: disease,eng,disease,489,False
+root_only,derivation,out_degree,4,eng: dog,eng,dog,455,False
+root_only,derivation,out_degree,5,eng: -eous,eng,-eous,418,True
+root_only,derivation,out_degree,6,eng: bird,eng,bird,373,False
+root_only,derivation,out_degree,7,eng: function,eng,function,340,False
+root_only,derivation,out_degree,8,eng: Chinese,eng,Chinese,337,False
+root_only,derivation,out_degree,9,eng: sugar,eng,sugar,322,False
+root_only,derivation,out_degree,10,eng: -logy,eng,-logy,316,True
+root_only,derivation,in_degree,1,eng: noun-->,eng,noun-->,11,False
+root_only,derivation,in_degree,2,eng: as,eng,as,9,False
+root_only,derivation,in_degree,3,eng: adjective-->,eng,adjective-->,8,False
+root_only,derivation,in_degree,4,eng: grand poobah,eng,grand poobah,7,False
+root_only,derivation,in_degree,5,eng: etc.,eng,etc.,6,False
+root_only,derivation,in_degree,6,eng: a broken clock is right twice a day,eng,a broken clock is right twice a day,5,False
+root_only,derivation,in_degree,7,eng: nice guys finish last,eng,nice guys finish last,5,False
+root_only,derivation,in_degree,8,eng: the hand that rocks the cradle rules the world,eng,the hand that rocks the cradle rules the world,5,False
+root_only,derivation,in_degree,9,eng: MD,eng,MD,4,False
+root_only,derivation,in_degree,10,eng: Usonian,eng,Usonian,4,False
+normalized,word_origin,out_degree,1,eng: non-,eng,non-,5742,True
+normalized,word_origin,out_degree,2,eng: -ly,eng,-ly,5438,True
+normalized,word_origin,out_degree,3,eng: un-,eng,un-,4203,True
+normalized,word_origin,out_degree,4,eng: -ness,eng,-ness,3295,True
+normalized,word_origin,out_degree,5,eng: -like,eng,-like,2437,True
+normalized,word_origin,out_degree,6,eng: -er,eng,-er,2347,True
+normalized,word_origin,out_degree,7,eng: -less,eng,-less,1912,True
+normalized,word_origin,out_degree,8,eng: -able,eng,-able,1428,True
+normalized,word_origin,out_degree,9,eng: anti-,eng,anti-,1295,True
+normalized,word_origin,out_degree,10,eng: -y,eng,-y,1229,True
+normalized,word_origin,in_degree,1,eng: file,eng,file,5,False
+normalized,word_origin,in_degree,2,eng: radiogram,eng,radiogram,5,False
+normalized,word_origin,in_degree,3,deu: Bauer,deu,Bauer,4,False
+normalized,word_origin,in_degree,4,eng: -er,eng,-er,4,True
+normalized,word_origin,in_degree,5,eng: Albanian,eng,Albanian,4,False
+normalized,word_origin,in_degree,6,eng: Caesarean,eng,Caesarean,4,False
+normalized,word_origin,in_degree,7,eng: a-,eng,a-,4,True
+normalized,word_origin,in_degree,8,eng: abasic,eng,abasic,4,False
+normalized,word_origin,in_degree,9,eng: aspiration,eng,aspiration,4,False
+normalized,word_origin,in_degree,10,eng: atopical,eng,atopical,4,False
+normalized,derivation,out_degree,1,eng: time,eng,time,1289,False
+normalized,derivation,out_degree,2,eng: poly-,eng,poly-,902,True
+normalized,derivation,out_degree,3,eng: disease,eng,disease,489,False
+normalized,derivation,out_degree,4,eng: dog,eng,dog,455,False
+normalized,derivation,out_degree,5,eng: -eous,eng,-eous,418,True
+normalized,derivation,out_degree,6,eng: bird,eng,bird,373,False
+normalized,derivation,out_degree,7,eng: function,eng,function,340,False
+normalized,derivation,out_degree,8,eng: Chinese,eng,Chinese,337,False
+normalized,derivation,out_degree,9,eng: sugar,eng,sugar,322,False
+normalized,derivation,out_degree,10,eng: -logy,eng,-logy,316,True
+normalized,derivation,in_degree,1,eng: noun-->,eng,noun-->,11,False
+normalized,derivation,in_degree,2,eng: as,eng,as,9,False
+normalized,derivation,in_degree,3,eng: adjective-->,eng,adjective-->,8,False
+normalized,derivation,in_degree,4,eng: grand poobah,eng,grand poobah,7,False
+normalized,derivation,in_degree,5,eng: etc.,eng,etc.,6,False
+normalized,derivation,in_degree,6,eng: a broken clock is right twice a day,eng,a broken clock is right twice a day,5,False
+normalized,derivation,in_degree,7,eng: nice guys finish last,eng,nice guys finish last,5,False
+normalized,derivation,in_degree,8,eng: the hand that rocks the cradle rules the world,eng,the hand that rocks the cradle rules the world,5,False
+normalized,derivation,in_degree,9,eng: MD,eng,MD,4,False
+normalized,derivation,in_degree,10,eng: Usonian,eng,Usonian,4,False

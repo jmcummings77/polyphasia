@@ -6,6 +6,9 @@ The audit compares explicit graph-construction policies without deleting cyclic
 nodes or losing the original assertions. It is an additive workflow: the existing
 `clean_data_frame`, `DirectedGraph`, and `UndirectedGraph` APIs retain their behavior.
 
+The [analysis workflow](reproducible-analysis.md) incorporates this audit and adds
+query comparisons, rankings, source traces, figures, and execution provenance.
+
 ## Run an audit
 
 From the repository root with the core development environment installed:

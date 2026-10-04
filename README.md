@@ -34,6 +34,18 @@ PY
 
 The sample is synthetic. No dataset download, notebook environment, or database is needed.
 
+## Reproducible analysis
+
+The [analysis workflow](docs/reproducible-analysis.md) compares relationship
+policies and ancestry/context queries, separates origin and derivation rankings,
+and traces example paths to source assertions. Start with the 37-record synthetic
+fixture; the verified notebook consumes generated, checksummed artifacts and
+runs from a fresh kernel in CI.
+
+The [recorded full-corpus run](reports/20130208/README.md) publishes query
+comparisons, relationship-specific rankings, and traceable examples with its
+input and implementation fingerprints.
+
 ## Documentation
 
 | Guide | What it covers |
@@ -42,6 +54,7 @@ The sample is synthetic. No dataset download, notebook environment, or database 
 | [Data audit and projections](docs/data-audit.md) | Source provenance, assertion preservation, inverse coverage, and cycle diagnostics |
 | [Graph queries and behavior](docs/graph-behavior.md) | Explicit ancestry/context queries, cycles, condensation, and wrapper contracts |
 | [Query benchmarks](docs/query-benchmarks.md) | Equivalent-result comparisons with isolated timing and memory measurements |
+| [Reproducible analysis](docs/reproducible-analysis.md) | Fixture/full-data commands, analytical boundaries, artifacts, and verified notebook |
 | [Development](docs/README-DEV.md) | Setup, tests, quality checks, and packaging |
 | [Research and notebooks](docs/research.md) | Project background, dataset provenance, notebook setup, and roadmap |
 | [Experimental Neo4j export](experiments/README.md) | Portable CSV export and its validation limits |
