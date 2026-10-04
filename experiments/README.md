@@ -6,6 +6,14 @@ These source-only experiments are separate from the installed `polyphasia`
 package. The tested loader and NetworkX graph helpers live in `polyphasia/`;
 these scripts and the separate `notebooks/` directory preserve exploratory work.
 
+## Graph query benchmarks
+
+`benchmark_queries.py` compares equivalent ancestor, root-family, component,
+and cyclic-node selections in isolated worker processes. It records input and
+result fingerprints, timing, peak RSS, and environment details. See the
+[benchmark guide](../docs/query-benchmarks.md) for commands, baselines, limits,
+and measurement scope. No external dataset is required.
+
 ## Neo4j CSV export
 
 After [setting up the core environment](../docs/README-DEV.md#set-up-the-core-environment),

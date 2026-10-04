@@ -228,3 +228,64 @@ def test_language_subgraph_is_a_view_with_shared_edge_attributes(graph_type):
     )
     with pytest.raises(nx.NetworkXError):
         subgraph.add_node("eng: extra")
+
+
+def test_root_family_union_matches_explicit_overlapping_families():
+    graph = DirectedGraph(
+        edge_frame(
+            ("lat: first", "eng: shared"),
+            ("deu: second", "eng: shared"),
+            ("lat: first", "fra: sibling"),
+            ("eng: shared", "ita: child"),
+            ("eng: isolated-cycle", "eng: isolated-cycle"),
+        )
+    )
+    explicit = graph.language_subgraph(nodes=graph.language_nodes("eng"))
+    optimized = graph.language_subgraph("eng")
+    assert set(optimized) == {
+        "lat: first",
+        "deu: second",
+        "eng: shared",
+        "fra: sibling",
+        "ita: child",
+    }
+    assert dict(optimized.nodes(data=True)) == dict(explicit.nodes(data=True))
+    assert dict(optimized.edges) == dict(explicit.edges)
+
+
+def test_cycle_removal_does_not_enumerate_cycles(monkeypatch):
+    graph = DirectedGraph(
+        edge_frame(
+            ("eng: a", "eng: b"),
+            ("eng: b", "eng: a"),
+            ("eng: b", "eng: tail"),
+            ("eng: self", "eng: self"),
+        )
+    )
+
+    def enumeration_is_unnecessary():
+        raise AssertionError("Removal must use cyclic membership, not all cycles")
+
+    monkeypatch.setattr(graph, "get_cycles", enumeration_is_unnecessary)
+    graph.remove_cycles()
+    assert graph.roots() == ["eng: tail"]
+    assert graph.is_dag
+
+
+def test_undirected_selection_accepts_repeated_seeds_without_repeated_components():
+    graph = UndirectedGraph(
+        edge_frame(
+            ("lat: root", "eng: one"),
+            ("eng: one", "eng: two"),
+            ("fra: other", "fra: leaf"),
+        )
+    )
+    selected = graph.language_subgraph(nodes=["eng: one", "eng: one", "eng: two"])
+    assert set(selected) == {"lat: root", "eng: one", "eng: two"}
+    assert selected.number_of_edges() == 2
+
+
+def test_undirected_wrapper_preserves_missing_seed_error_type():
+    graph = UndirectedGraph(edge_frame(("lat: root", "eng: leaf")))
+    with pytest.raises(nx.NetworkXError, match="missing"):
+        graph.language_subgraph(nodes=["eng: leaf", "missing"])

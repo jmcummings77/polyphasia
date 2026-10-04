@@ -31,6 +31,11 @@ uv run pre-commit run --all-files
 
 Tests cover small TSV inputs, graph behavior, and local experimental CSV generation. Historical notebooks and live Neo4j imports are outside the automated test suite.
 
+Query tests include independently specified selections and comparisons against
+NetworkX on small generated cyclic graphs and DAGs. The benchmark CLI has a small
+worker-process smoke test; full benchmark runs are manual and have no CI timing
+thresholds. See [query benchmarks](query-benchmarks.md).
+
 CI runs the checks above, builds distributions, and runs the sample against an installed wheel outside the checkout. The coverage gate is 90% across core statements and branches.
 
 ## Update dependencies and build

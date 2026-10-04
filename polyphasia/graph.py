@@ -6,10 +6,15 @@ import networkx as nx
 from networkx.algorithms.components import connected_components
 from networkx.algorithms.cycles import simple_cycles
 from networkx.algorithms.dag import dag_longest_path, is_directed_acyclic_graph
-from networkx.algorithms.traversal import bfs_tree
 from pandas import DataFrame
 
 from polyphasia.constants import EDGE_ATTRIBUTES, LANGUAGE_PREFIX_TAG, SourceColumnNames
+from polyphasia.queries import (
+    component_subgraph,
+    cyclic_nodes,
+    language_nodes,
+    root_family_subgraph,
+)
 
 
 class DirectedGraph:
@@ -49,7 +54,10 @@ class DirectedGraph:
 
     def get_cycles(self) -> List[List[Any]]:
         """
-        Get the list of simple cycles in the graph
+        Get every simple cycle; enumeration can be expensive.
+
+        Prefer ``polyphasia.queries.cyclic_nodes`` for membership diagnosis or
+        ``cycle_examples`` for a length-limited sample of cycles.
         :return: a list of a list of nodes
         :rtype: List[List[Any]]
         """
@@ -61,11 +69,12 @@ class DirectedGraph:
         Remove all nodes participating in cycles, including their incident edges.
 
         This mutates the graph and can also disconnect nodes outside the cycles.
+        Membership is identified using strongly connected components, without
+        enumerating all simple cycles. Prefer non-destructive queries for analysis.
         :return: None
         :rtype: None
         """
-        cycle_nodes = [node for cycle in self.get_cycles() for node in cycle]
-        self._nx_digraph.remove_nodes_from(cycle_nodes)
+        self._nx_digraph.remove_nodes_from(cyclic_nodes(self._nx_digraph))
 
     def get_longest_path(self) -> List[Any]:
         """
@@ -121,8 +130,8 @@ class DirectedGraph:
         """
         Return the induced view containing matching root families.
 
-        By default, uses ``language_nodes`` and retains roots, descendants, and
-        their original edge directions. When ``nodes`` is supplied, its union is
+        By default, selects matching root families with shared traversals and
+        retains their original edge directions. When ``nodes`` is supplied, its union is
         used exactly; no language filtering or graph traversal is performed.
         An empty list returns an empty view. Attribute edits on the view are
         shared with the original graph.
@@ -135,8 +144,10 @@ class DirectedGraph:
         :rtype: subgraph
         """
         if nodes is None:
-            nodes = self.language_nodes(language)
-        graph = self._nx_digraph.subgraph([node for desc in nodes for node in desc])
+            return root_family_subgraph(
+                self._nx_digraph, language_nodes(self._nx_digraph, language)
+            )
+        graph = self._nx_digraph.subgraph(node for family in nodes for node in family)
         return graph
 
     @staticmethod
@@ -239,11 +250,11 @@ class UndirectedGraph:
         """
         if nodes is None:
             nodes = self.language_nodes(language)
-        bfs_nodes_to_add: List[Any] = []
-        for node in nodes:
-            bfs_nodes_to_add.extend(bfs_tree(self._nx_graph, source=node))
-        bfs_graph = self._nx_graph.subgraph(bfs_nodes_to_add)
-        return bfs_graph
+        try:
+            return component_subgraph(self._nx_graph, nodes)
+        except nx.NodeNotFound as exc:
+            # Preserve the legacy bfs_tree exception contract for this wrapper.
+            raise nx.NetworkXError(str(exc)) from exc
 
     @staticmethod
     def subgraph_info(subgraph: Any) -> str:

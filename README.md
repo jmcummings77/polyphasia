@@ -40,7 +40,8 @@ The sample is synthetic. No dataset download, notebook environment, or database 
 | --- | --- |
 | [Data format and cleaning](docs/data-format.md) | TSV schema, validation, relationship filtering, and aliases |
 | [Data audit and projections](docs/data-audit.md) | Source provenance, assertion preservation, inverse coverage, and cycle diagnostics |
-| [Graph behavior](docs/graph-behavior.md) | Language families, traversal, cycles, and information loss |
+| [Graph queries and behavior](docs/graph-behavior.md) | Explicit ancestry/context queries, cycles, condensation, and wrapper contracts |
+| [Query benchmarks](docs/query-benchmarks.md) | Equivalent-result comparisons with isolated timing and memory measurements |
 | [Development](docs/README-DEV.md) | Setup, tests, quality checks, and packaging |
 | [Research and notebooks](docs/research.md) | Project background, dataset provenance, notebook setup, and roadmap |
 | [Experimental Neo4j export](experiments/README.md) | Portable CSV export and its validation limits |
