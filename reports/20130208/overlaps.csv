@@ -1,0 +1,13 @@
+policy,left,right,intersection_nodes,union_nodes,left_only_nodes,right_only_nodes,jaccard
+root_only,ancestors,descendants,422032,467981,34047,11902,0.9018143899004447
+root_only,ancestors,root_families,454659,1035404,1420,579325,0.4391126555431503
+root_only,ancestors,components,456079,1608496,0,1152417,0.283543757646895
+root_only,descendants,root_families,432835,1035083,1099,601149,0.4181645336654162
+root_only,descendants,components,433934,1608496,0,1174562,0.26977623817528923
+root_only,root_families,components,1033984,1608496,0,574512,0.6428265908028369
+normalized,ancestors,descendants,422032,467982,34048,11902,0.9018124628725036
+normalized,ancestors,root_families,454660,1035405,1420,579325,0.43911319725131714
+normalized,ancestors,components,456080,1608497,0,1152417,0.2835442030665895
+normalized,descendants,root_families,432835,1035084,1099,601150,0.41816412967449984
+normalized,descendants,components,433934,1608497,0,1174563,0.26977607045583546
+normalized,root_families,components,1033985,1608497,0,574512,0.6428268128569714

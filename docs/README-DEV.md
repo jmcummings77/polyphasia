@@ -63,7 +63,8 @@ uv build
 
 The wheel contains only `polyphasia`; install `polyphasia[analysis]` to render the
 workflow's figures. The source distribution also includes examples, tests,
-experiments, and the verified notebook with its execution script.
+experiments, the verified notebook with its execution script, and the recorded
+full-run snapshot with source attribution. Raw data is excluded.
 
 ## Choose where code belongs
 

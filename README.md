@@ -42,6 +42,10 @@ and traces example paths to source assertions. Start with the 37-record syntheti
 fixture; the verified notebook consumes generated, checksummed artifacts and
 runs from a fresh kernel in CI.
 
+The [recorded full-corpus run](reports/20130208/README.md) publishes query
+comparisons, relationship-specific rankings, and traceable examples with its
+input and implementation fingerprints.
+
 ## Documentation
 
 | Guide | What it covers |

@@ -130,6 +130,10 @@ build artifacts. Other notebooks remain historical exploration.
 
 ## Run the full pinned corpus
 
+The [recorded full run](../reports/20130208/README.md) includes a compact published
+snapshot with verified findings, figures, source traces, and its original manifest.
+The notebook can read it without downloading the corpus.
+
 Acquire the source described in the [data notes](../data/data_source.md). This
 workflow loads all assertions and constructs graph projections sequentially;
 allow several gigabytes of RAM and several minutes on a development machine.
