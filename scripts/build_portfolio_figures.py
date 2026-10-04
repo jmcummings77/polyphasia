@@ -33,11 +33,24 @@ def _sha256(path: Path) -> str:
 
 
 def validate_benchmark(report: dict[str, Any]) -> None:
-    """Recompute every persisted comparison and require complete repeated runs."""
-    from experiments.benchmark_queries import benchmark_cases, summarize_case
+    """Check case identities and saved comparisons against their measured code.
+
+    Historical reports require the recorded builder/query sources. Reconstructing
+    these bounded inputs and selections validates their labels without timing
+    queries, launching workers, or executing the exhaustive baseline.
+    """
+    from experiments import benchmark_queries as benchmark
 
     if report.get("schema_version") != 1:
         raise ValueError("Unsupported benchmark schema")
+    implementation_hashes = {
+        "benchmark_queries.py": _sha256(Path(benchmark.__file__)),
+        "queries.py": _sha256(Path(benchmark.queries.__file__)),
+    }
+    if report.get("implementation_sha256") != implementation_hashes:
+        raise ValueError(
+            "Benchmark validation requires its recorded implementation sources"
+        )
     parameters = report["parameters"]
     if parameters["sizes"] != [128, 256, 512] or parameters["repeats"] != 3:
         raise ValueError("Figures require sizes 128/256/512 and three repetitions")
@@ -46,7 +59,7 @@ def validate_benchmark(report: dict[str, Any]) -> None:
         or parameters.get("warmup_queries_per_worker") != 1
     ):
         raise ValueError("Figures require cycle sizes 6/7/8 and one warmup per worker")
-    expected = benchmark_cases(
+    expected = benchmark.benchmark_cases(
         tuple(parameters["sizes"]), tuple(parameters["cycle_sizes"])
     )
     identities = {(c["topology"], c["size"], c["query"]) for c in expected}
@@ -67,8 +80,32 @@ def validate_benchmark(report: dict[str, Any]) -> None:
         if any(not math.isfinite(r["peak_rss_bytes"]) for r in runs):
             raise ValueError("Benchmark RSS must be finite")
         identity = {key: case[key] for key in ("topology", "size", "query")}
-        if summarize_case(identity, runs) != case:
+        if benchmark.summarize_case(identity, runs) != case:
             raise ValueError("Benchmark summary disagrees with its recorded runs")
+        graph, seeds = benchmark.build_case(case["topology"], case["size"])
+        expected_input = {
+            "directed": graph.is_directed(),
+            "nodes": graph.number_of_nodes(),
+            "edges": graph.number_of_edges(),
+            "seeds": len(seeds),
+            "sha256": benchmark._fingerprint(
+                {
+                    "directed": graph.is_directed(),
+                    "nodes": sorted(graph),
+                    "edges": sorted(graph.edges()),
+                    "seeds": sorted(seeds),
+                }
+            ),
+        }
+        if case["input"] != expected_input:
+            raise ValueError(
+                "Benchmark input disagrees with its declared topology and size"
+            )
+        selected = benchmark._optimized(graph, seeds, case["query"])
+        if case["selected_nodes"] != len(selected) or case[
+            "selected_nodes_sha256"
+        ] != benchmark._fingerprint(sorted(selected)):
+            raise ValueError("Benchmark selection disagrees with its declared query")
 
 
 def validate_accounting(audit: dict[str, Any], analysis: dict[str, Any]) -> None:
@@ -458,6 +495,8 @@ def build_figures(analysis: Path, benchmark: Path, output: Path) -> dict[str, An
             {
                 "font.family": "DejaVu Sans",
                 "font.size": 10.5,
+                "text.parse_math": False,
+                "text.usetex": False,
                 "text.color": INK,
                 "axes.labelcolor": INK,
                 "xtick.color": "#52656e",

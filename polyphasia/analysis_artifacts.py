@@ -127,6 +127,10 @@ def write_figures(audit: dict[str, Any], report: dict[str, Any], output: Path) -
         {
             "font.family": "DejaVu Sans",
             "font.size": 10,
+            # Source labels are literal evidence, including dollar signs and
+            # backslashes that otherwise activate Matplotlib's math rendering.
+            "text.parse_math": False,
+            "text.usetex": False,
             "axes.spines.top": False,
             "axes.spines.right": False,
         }

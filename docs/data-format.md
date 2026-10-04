@@ -20,6 +20,11 @@ lat: exemplum	rel:etymological_origin_of	eng: example
 
 `load_to_pandas(path)` preserves fields as strings. Quotes are literal characters, and values such as `NA` are not converted to nulls. Blank lines are skipped. Rows with missing, extra, empty, or whitespace-only fields raise `ValueError`; missing files raise `FileNotFoundError`.
 
+NUL bytes are rejected before parsing because the fast TSV parser would otherwise
+silently truncate fields at them. Direct DataFrame inputs also reject NUL
+characters in any of the three source columns. Labels are never repaired by
+dropping a suffix or merging the resulting nodes.
+
 Prefer an explicit path. With no argument, the loader reads `data/raw/etymologies.tsv` relative to the **current working directory**. From `notebooks/`, pass `Path("../data/raw/etymologies.tsv")` explicitly.
 
 ## Cleaning contract

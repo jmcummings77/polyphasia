@@ -123,6 +123,16 @@ def test_missing_relationship_is_rejected(value):
         clean_data_frame(frame(["eng: root", value, "eng: leaf"]))
 
 
+@pytest.mark.parametrize("column", EDGE_LIST_COLUMN_NAMES)
+def test_dataframe_nul_fields_are_rejected_without_mutation(column):
+    original = frame(["eng: root", "rel:has_derived_form", "eng: leaf"])
+    original.loc[0, column] += "\x00lost"
+    before = original.copy(deep=True)
+    with pytest.raises(ValueError, match=f"{column}.*NUL"):
+        clean_data_frame(original)
+    assert_frame_equal(original, before)
+
+
 @pytest.mark.parametrize(
     "contents",
     [
@@ -136,6 +146,41 @@ def test_malformed_tsv_is_rejected(tmp_path, contents):
     source = tmp_path / "invalid.tsv"
     source.write_text(contents, encoding="utf-8")
     with pytest.raises(ValueError):
+        load_to_pandas(source)
+
+
+@pytest.mark.parametrize("column", EDGE_LIST_COLUMN_NAMES)
+def test_tsv_nul_fields_are_rejected_before_parser_truncation(tmp_path, column):
+    row = dict(
+        zip(EDGE_LIST_COLUMN_NAMES, ["eng: root", "rel:has_derived_form", "eng: leaf"])
+    )
+    row[column] += "\x00lost"
+    source = tmp_path / "nul.tsv"
+    source.write_text("\t".join(row.values()) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="NUL"):
+        load_to_pandas(source)
+
+
+def test_nul_labels_cannot_collapse_distinct_records(tmp_path):
+    source = tmp_path / "distinct.tsv"
+    source.write_bytes(
+        b"lat: root\trel:has_derived_form\teng: leaf\n"
+        b"lat: root\trel:has_derived_form\teng: leaf\x00lost\n"
+    )
+    with pytest.raises(ValueError, match="NUL"):
+        load_to_pandas(source)
+
+
+@pytest.mark.parametrize("offset", [1024 * 1024 - 1, 1024 * 1024, 1024 * 1024 + 1])
+def test_tsv_nul_rejection_at_scan_chunk_boundaries(tmp_path, offset):
+    source = tmp_path / "later-nul.tsv"
+    prefix = b"eng: "
+    source.write_bytes(
+        prefix
+        + b"a" * (offset - len(prefix))
+        + b"\x00lost\trel:has_derived_form\teng: leaf\n"
+    )
+    with pytest.raises(ValueError, match="NUL"):
         load_to_pandas(source)
 
 

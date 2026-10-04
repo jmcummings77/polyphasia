@@ -75,6 +75,40 @@ def test_tables_and_traces_reconcile_with_independent_fixture(completed_runs):
         )
 
 
+@pytest.mark.parametrize("use_tex", [False, True])
+def test_figures_render_source_labels_literally_without_changing_caller_style(
+    tmp_path, monkeypatch, use_tex
+):
+    import matplotlib
+    from matplotlib.backends.backend_agg import RendererAgg
+
+    labels = {"lat: $x$", r"lat: $\invalidcommand$"}
+    source = tmp_path / "literal-labels.tsv"
+    source.write_text(
+        "".join(
+            f"{label}\trel:etymological_origin_of\teng: leaf\n"
+            for label in sorted(labels)
+        ),
+        encoding="utf-8",
+    )
+    rendered = set()
+    draw_text = RendererAgg.draw_text
+
+    def inspect_text(renderer, gc, x, y, text, prop, angle, ismath=False, mtext=None):
+        if text in labels:
+            assert ismath is False
+            rendered.add(text)
+        return draw_text(renderer, gc, x, y, text, prop, angle, ismath, mtext)
+
+    monkeypatch.setattr(RendererAgg, "draw_text", inspect_text)
+    with matplotlib.rc_context({"text.parse_math": True, "text.usetex": use_tex}):
+        analysis.write_analysis(source, tmp_path / "run")
+        assert matplotlib.rcParams["text.parse_math"] is True
+        assert matplotlib.rcParams["text.usetex"] is use_tex
+    assert rendered == labels
+    analysis.validate_run(tmp_path / "run")
+
+
 def test_existing_output_is_never_replaced(completed_runs):
     root, _ = completed_runs
     original = (root / "manifest.json").read_bytes()

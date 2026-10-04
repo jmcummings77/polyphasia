@@ -26,19 +26,27 @@ def load_to_pandas(source_file: Optional[Path] = None) -> pd.DataFrame:
     Quotes and strings such as ``NA`` are literal data, not CSV quoting or nulls.
     Empty files return the expected three-column schema. Malformed rows raise
     ``ValueError``; missing files retain the usual ``FileNotFoundError``.
+    NUL bytes are rejected before parsing so they cannot silently truncate fields.
     """
     if source_file is None:
         source_file = RELATIVE_PATH_TO_SOURCE
     try:
-        data_frame = pd.read_csv(
-            source_file,
-            sep="\t",
-            header=None,
-            dtype=str,
-            encoding="utf-8",
-            keep_default_na=False,
-            quoting=csv.QUOTE_NONE,
-        )
+        with open(source_file, "rb") as source:
+            # The fast C parser silently truncates fields at NUL bytes. Check
+            # the same file handle first, without retaining the corpus in memory.
+            while chunk := source.read(1024 * 1024):
+                if b"\x00" in chunk:
+                    raise ValueError("TSV input must not contain NUL bytes")
+            source.seek(0)
+            data_frame = pd.read_csv(
+                source,
+                sep="\t",
+                header=None,
+                dtype=str,
+                encoding="utf-8",
+                keep_default_na=False,
+                quoting=csv.QUOTE_NONE,
+            )
     except pd.errors.EmptyDataError:
         return pd.DataFrame(columns=EDGE_LIST_COLUMN_NAMES)
     except pd.errors.ParserError as exc:
@@ -51,7 +59,7 @@ def load_to_pandas(source_file: Optional[Path] = None) -> pd.DataFrame:
 
 
 def _validate_columns(data_frame: pd.DataFrame) -> None:
-    """Require a nonempty string in each of the three source fields."""
+    """Require a nonempty, NUL-free string in each source field."""
     missing = set(EDGE_LIST_COLUMN_NAMES).difference(data_frame.columns)
     if missing:
         raise ValueError(f"Missing required columns: {', '.join(sorted(missing))}")
@@ -63,6 +71,8 @@ def _validate_columns(data_frame: pd.DataFrame) -> None:
             lambda value: isinstance(value, str) and bool(value.strip())
         ).all():
             raise ValueError(f"{column} must contain nonempty strings")
+        if values.map(lambda value: "\x00" in value).any():
+            raise ValueError(f"{column} must not contain NUL characters")
 
 
 def clean_data_frame(

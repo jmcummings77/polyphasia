@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pytest
 
+from experiments import benchmark_queries as benchmark
 from scripts.build_portfolio_figures import (
     FIGURE_NAMES,
     build_figures,
@@ -26,7 +27,14 @@ def read_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def test_published_evidence_reconciles_without_rerunning_measurements():
+def test_published_evidence_reconciles_without_rerunning_measurements(monkeypatch):
+    def no_measurement(*args, **kwargs):
+        pytest.fail(
+            "Validation must not time queries, launch workers, or run baselines"
+        )
+
+    for name in ("perf_counter", "run_worker", "_launch_worker", "_baseline"):
+        monkeypatch.setattr(benchmark, name, no_measurement)
     validate_benchmark(read_json(BENCHMARK))
     validate_accounting(
         read_json(ANALYSIS / "audit.json"), read_json(ANALYSIS / "analysis.json")
@@ -66,6 +74,44 @@ def test_benchmark_validation_rejects_corrupt_summaries_and_runs(corruption):
     else:
         case["runs"][0] = copy.deepcopy(case["runs"][1])
     with pytest.raises(ValueError):
+        validate_benchmark(report)
+
+
+def test_benchmark_validation_rejects_measurements_assigned_to_the_wrong_size():
+    report = read_json(BENCHMARK)
+    cases = {c["size"]: c for c in report["cases"] if c["query"] == "root_family"}
+    case = cases[512]
+    identity = {key: case[key] for key in ("topology", "size", "query")}
+    case.update(benchmark.summarize_case(identity, copy.deepcopy(cases[128]["runs"])))
+
+    with pytest.raises(ValueError, match="declared topology and size"):
+        validate_benchmark(report)
+
+
+@pytest.mark.parametrize("field", ["input", "selected_nodes", "selected_nodes_sha256"])
+def test_benchmark_validation_rejects_consistently_wrong_case_evidence(field):
+    report = read_json(BENCHMARK)
+    case = report["cases"][0]
+    for run in case["runs"]:
+        if field == "input":
+            run["input"]["sha256"] = "0" * 64
+        elif field == "selected_nodes":
+            run[field] -= 1
+        else:
+            run[field] = "0" * 64
+    identity = {key: case[key] for key in ("topology", "size", "query")}
+    case.update(benchmark.summarize_case(identity, case["runs"]))
+
+    with pytest.raises(ValueError, match="declared"):
+        validate_benchmark(report)
+
+
+@pytest.mark.parametrize("source", ["benchmark_queries.py", "queries.py"])
+def test_benchmark_validation_requires_the_recorded_implementation(source):
+    report = read_json(BENCHMARK)
+    report["implementation_sha256"][source] = "0" * 64
+
+    with pytest.raises(ValueError, match="recorded implementation"):
         validate_benchmark(report)
 
 
@@ -162,6 +208,38 @@ def test_same_environment_renders_identical_artifacts(tmp_path):
     first = build_figures(ANALYSIS, BENCHMARK, tmp_path / "first")
     second = build_figures(ANALYSIS, BENCHMARK, tmp_path / "second")
     assert first == second
+
+
+def test_language_subtitles_render_literal_math_characters(tmp_path, monkeypatch):
+    import matplotlib
+    from matplotlib.backends.backend_agg import RendererAgg
+
+    from polyphasia.analysis import write_analysis
+
+    language = r"$\invalidcommand$"
+    source = tmp_path / "literal-language.tsv"
+    source.write_text(
+        f"lat: root\trel:etymological_origin_of\t{language}: leaf\n",
+        encoding="utf-8",
+    )
+    run = tmp_path / "run"
+    write_analysis(source, run, language=language, input_kind="synthetic")
+    rendered = []
+    draw_text = RendererAgg.draw_text
+
+    def inspect_text(renderer, gc, x, y, text, prop, angle, ismath=False, mtext=None):
+        if language in text:
+            assert ismath is False
+            rendered.append(text)
+        return draw_text(renderer, gc, x, y, text, prop, angle, ismath, mtext)
+
+    monkeypatch.setattr(RendererAgg, "draw_text", inspect_text)
+    with matplotlib.rc_context({"text.parse_math": True, "text.usetex": True}):
+        manifest = build_figures(run, BENCHMARK, tmp_path / "figures")
+        assert matplotlib.rcParams["text.parse_math"] is True
+        assert matplotlib.rcParams["text.usetex"] is True
+    assert any(f"projected {language} seeds" in text for text in rendered)
+    assert set(manifest["artifacts"]) == set(FIGURE_NAMES)
 
 
 def test_published_figures_match_current_inputs_renderer_and_recorded_hashes():

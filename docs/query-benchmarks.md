@@ -148,5 +148,11 @@ uv run --frozen --extra analysis python -m scripts.build_portfolio_figures \
 
 The output directory must be new. The renderer validates the report inputs and
 writes `runtime-memory-scaling.png` alongside two corpus-analysis figures and
-a rendering manifest. See the [renderer](../scripts/build_portfolio_figures.py)
+a rendering manifest. It reconstructs the bounded graph inputs and selected
+sets to check that each measurement belongs to its declared topology, size, and
+query; it does not time queries or rerun workers or exhaustive baselines. This
+validation requires the benchmark and query source files identified by the
+report's implementation hashes. A historical report must be rendered with its
+recorded implementations rather than interpreted through changed query code.
+See the [renderer](../scripts/build_portfolio_figures.py)
 and [published benchmark notes](../reports/benchmarks/README.md).
