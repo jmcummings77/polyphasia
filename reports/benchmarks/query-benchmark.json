@@ -1,0 +1,2048 @@
+{
+  "cases": [
+    {
+      "input": {
+        "directed": true,
+        "edges": 127,
+        "nodes": 128,
+        "seeds": 32,
+        "sha256": "137783703e508e01f56362b74d409be83852f74e48f6bc96db1f042c20784b1a"
+      },
+      "parity_verified": true,
+      "query": "ancestors",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "137783703e508e01f56362b74d409be83852f74e48f6bc96db1f042c20784b1a"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39370752,
+          "repetition": 1,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 0.0008246670477092266
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "137783703e508e01f56362b74d409be83852f74e48f6bc96db1f042c20784b1a"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39223296,
+          "repetition": 1,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 6.65000407025218e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "137783703e508e01f56362b74d409be83852f74e48f6bc96db1f042c20784b1a"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39190528,
+          "repetition": 2,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 6.479199510067701e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "137783703e508e01f56362b74d409be83852f74e48f6bc96db1f042c20784b1a"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39239680,
+          "repetition": 2,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 0.0008445839630439878
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "137783703e508e01f56362b74d409be83852f74e48f6bc96db1f042c20784b1a"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39223296,
+          "repetition": 3,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 0.0008685840293765068
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "137783703e508e01f56362b74d409be83852f74e48f6bc96db1f042c20784b1a"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39223296,
+          "repetition": 3,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 5.8750039897859097e-05
+        }
+      ],
+      "selected_nodes": 127,
+      "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+      "size": 128,
+      "speedup_baseline_over_optimized": 13.035313416906384,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39370752,
+            "median": 39239680,
+            "minimum": 39223296
+          },
+          "wall_seconds": {
+            "maximum": 0.0008685840293765068,
+            "median": 0.0008445839630439878,
+            "minimum": 0.0008246670477092266
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39223296,
+            "median": 39223296,
+            "minimum": 39190528
+          },
+          "wall_seconds": {
+            "maximum": 6.65000407025218e-05,
+            "median": 6.479199510067701e-05,
+            "minimum": 5.8750039897859097e-05
+          }
+        }
+      },
+      "topology": "chain"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 255,
+        "nodes": 256,
+        "seeds": 64,
+        "sha256": "82121028cd6c894839311b8e5008c80a476d1606a645c82487cd6f9e06128477"
+      },
+      "parity_verified": true,
+      "query": "ancestors",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "82121028cd6c894839311b8e5008c80a476d1606a645c82487cd6f9e06128477"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39288832,
+          "repetition": 1,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.0031863750191405416
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "82121028cd6c894839311b8e5008c80a476d1606a645c82487cd6f9e06128477"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39190528,
+          "repetition": 1,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.00010858301538974047
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "82121028cd6c894839311b8e5008c80a476d1606a645c82487cd6f9e06128477"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39305216,
+          "repetition": 2,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.0001105000264942646
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "82121028cd6c894839311b8e5008c80a476d1606a645c82487cd6f9e06128477"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39337984,
+          "repetition": 2,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.0031874999403953552
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "82121028cd6c894839311b8e5008c80a476d1606a645c82487cd6f9e06128477"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39354368,
+          "repetition": 3,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.0032099999953061342
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "82121028cd6c894839311b8e5008c80a476d1606a645c82487cd6f9e06128477"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39354368,
+          "repetition": 3,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 9.30840615183115e-05
+        }
+      ],
+      "selected_nodes": 255,
+      "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+      "size": 256,
+      "speedup_baseline_over_optimized": 29.35541925184487,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39354368,
+            "median": 39337984,
+            "minimum": 39288832
+          },
+          "wall_seconds": {
+            "maximum": 0.0032099999953061342,
+            "median": 0.0031874999403953552,
+            "minimum": 0.0031863750191405416
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39354368,
+            "median": 39305216,
+            "minimum": 39190528
+          },
+          "wall_seconds": {
+            "maximum": 0.0001105000264942646,
+            "median": 0.00010858301538974047,
+            "minimum": 9.30840615183115e-05
+          }
+        }
+      },
+      "topology": "chain"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 511,
+        "nodes": 512,
+        "seeds": 128,
+        "sha256": "70186b13d95857150a9f58c357631ebb5ef18371d9278b65c833c0efe8c7822b"
+      },
+      "parity_verified": true,
+      "query": "ancestors",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "70186b13d95857150a9f58c357631ebb5ef18371d9278b65c833c0efe8c7822b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39698432,
+          "repetition": 1,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.013588291010819376
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "70186b13d95857150a9f58c357631ebb5ef18371d9278b65c833c0efe8c7822b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39616512,
+          "repetition": 1,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.0001812500413507223
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "70186b13d95857150a9f58c357631ebb5ef18371d9278b65c833c0efe8c7822b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39550976,
+          "repetition": 2,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.0001757090212777257
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "70186b13d95857150a9f58c357631ebb5ef18371d9278b65c833c0efe8c7822b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39616512,
+          "repetition": 2,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.013758791028521955
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "70186b13d95857150a9f58c357631ebb5ef18371d9278b65c833c0efe8c7822b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39600128,
+          "repetition": 3,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.013542667031288147
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "70186b13d95857150a9f58c357631ebb5ef18371d9278b65c833c0efe8c7822b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39665664,
+          "repetition": 3,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.00017604103777557611
+        }
+      ],
+      "selected_nodes": 511,
+      "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+      "size": 512,
+      "speedup_baseline_over_optimized": 77.18820101561916,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39698432,
+            "median": 39616512,
+            "minimum": 39600128
+          },
+          "wall_seconds": {
+            "maximum": 0.013758791028521955,
+            "median": 0.013588291010819376,
+            "minimum": 0.013542667031288147
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39665664,
+            "median": 39616512,
+            "minimum": 39550976
+          },
+          "wall_seconds": {
+            "maximum": 0.0001812500413507223,
+            "median": 0.00017604103777557611,
+            "minimum": 0.0001757090212777257
+          }
+        }
+      },
+      "topology": "chain"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 127,
+        "nodes": 128,
+        "seeds": 32,
+        "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+      },
+      "parity_verified": true,
+      "query": "ancestors",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39256064,
+          "repetition": 1,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 0.0010826669167727232
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39387136,
+          "repetition": 1,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 8.649996016174555e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39190528,
+          "repetition": 2,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 7.816695142537355e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39370752,
+          "repetition": 2,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 0.00079008296597749
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39239680,
+          "repetition": 3,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 0.0007972919847816229
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39190528,
+          "repetition": 3,
+          "selected_nodes": 127,
+          "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+          "wall_seconds": 6.40420475974679e-05
+        }
+      ],
+      "selected_nodes": 127,
+      "selected_nodes_sha256": "e3c01139bbdc3d3d3714e495b2a687e6f2fa613ddf7fe07857a5ed8b9d6a9d3e",
+      "size": 128,
+      "speedup_baseline_over_optimized": 10.199860302122723,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39370752,
+            "median": 39256064,
+            "minimum": 39239680
+          },
+          "wall_seconds": {
+            "maximum": 0.0010826669167727232,
+            "median": 0.0007972919847816229,
+            "minimum": 0.00079008296597749
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39387136,
+            "median": 39190528,
+            "minimum": 39190528
+          },
+          "wall_seconds": {
+            "maximum": 8.649996016174555e-05,
+            "median": 7.816695142537355e-05,
+            "minimum": 6.40420475974679e-05
+          }
+        }
+      },
+      "topology": "overlapping_roots"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 127,
+        "nodes": 128,
+        "seeds": 32,
+        "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+      },
+      "parity_verified": true,
+      "query": "root_family",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39157760,
+          "repetition": 1,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.0008985409513115883
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39124992,
+          "repetition": 1,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.00010170892346650362
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39288832,
+          "repetition": 2,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.0001259580021724105
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39174144,
+          "repetition": 2,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.0009226249530911446
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39305216,
+          "repetition": 3,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.0009502919856458902
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 127,
+            "nodes": 128,
+            "seeds": 32,
+            "sha256": "0cdfcd184623e3698c30542eefb89c5235568f4ece047b9ad10dc0ad267c9a65"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39157760,
+          "repetition": 3,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.00010295899119228125
+        }
+      ],
+      "selected_nodes": 128,
+      "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+      "size": 128,
+      "speedup_baseline_over_optimized": 8.96109161916801,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39305216,
+            "median": 39174144,
+            "minimum": 39157760
+          },
+          "wall_seconds": {
+            "maximum": 0.0009502919856458902,
+            "median": 0.0009226249530911446,
+            "minimum": 0.0008985409513115883
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39288832,
+            "median": 39157760,
+            "minimum": 39124992
+          },
+          "wall_seconds": {
+            "maximum": 0.0001259580021724105,
+            "median": 0.00010295899119228125,
+            "minimum": 0.00010170892346650362
+          }
+        }
+      },
+      "topology": "overlapping_roots"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 255,
+        "nodes": 256,
+        "seeds": 64,
+        "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+      },
+      "parity_verified": true,
+      "query": "ancestors",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39288832,
+          "repetition": 1,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.0029692499665543437
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39206912,
+          "repetition": 1,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.00010095804464071989
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39419904,
+          "repetition": 2,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 9.979098103940487e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39501824,
+          "repetition": 2,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.0029767079977318645
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39256064,
+          "repetition": 3,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.0035601670388132334
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39256064,
+          "repetition": 3,
+          "selected_nodes": 255,
+          "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+          "wall_seconds": 0.00012133305426687002
+        }
+      ],
+      "selected_nodes": 255,
+      "selected_nodes_sha256": "29e188442d82e759c14fe8079cd09c6aaecfc74a71d675d6b871c64bed5a4c2b",
+      "size": 256,
+      "speedup_baseline_over_optimized": 29.484604305928233,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39501824,
+            "median": 39288832,
+            "minimum": 39256064
+          },
+          "wall_seconds": {
+            "maximum": 0.0035601670388132334,
+            "median": 0.0029767079977318645,
+            "minimum": 0.0029692499665543437
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39419904,
+            "median": 39256064,
+            "minimum": 39206912
+          },
+          "wall_seconds": {
+            "maximum": 0.00012133305426687002,
+            "median": 0.00010095804464071989,
+            "minimum": 9.979098103940487e-05
+          }
+        }
+      },
+      "topology": "overlapping_roots"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 255,
+        "nodes": 256,
+        "seeds": 64,
+        "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+      },
+      "parity_verified": true,
+      "query": "root_family",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39534592,
+          "repetition": 1,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.003563874983228743
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39239680,
+          "repetition": 1,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.00018725008703768253
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39239680,
+          "repetition": 2,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.00019229203462600708
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39256064,
+          "repetition": 2,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.0034735830267891288
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39452672,
+          "repetition": 3,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.0033630419056862593
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 255,
+            "nodes": 256,
+            "seeds": 64,
+            "sha256": "25c2846f11b51a8264dda7446f7695b0a85cc6331a16dce95ccf1f71947374fe"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39239680,
+          "repetition": 3,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.00016920804046094418
+        }
+      ],
+      "selected_nodes": 256,
+      "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+      "size": 256,
+      "speedup_baseline_over_optimized": 18.550501533759494,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39534592,
+            "median": 39452672,
+            "minimum": 39256064
+          },
+          "wall_seconds": {
+            "maximum": 0.003563874983228743,
+            "median": 0.0034735830267891288,
+            "minimum": 0.0033630419056862593
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39239680,
+            "median": 39239680,
+            "minimum": 39239680
+          },
+          "wall_seconds": {
+            "maximum": 0.00019229203462600708,
+            "median": 0.00018725008703768253,
+            "minimum": 0.00016920804046094418
+          }
+        }
+      },
+      "topology": "overlapping_roots"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 511,
+        "nodes": 512,
+        "seeds": 128,
+        "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+      },
+      "parity_verified": true,
+      "query": "ancestors",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39698432,
+          "repetition": 1,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.012448583962395787
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39567360,
+          "repetition": 1,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.00017462496180087328
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39550976,
+          "repetition": 2,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.000181750045157969
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39632896,
+          "repetition": 2,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.01230062497779727
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39632896,
+          "repetition": 3,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.012403542059473693
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39550976,
+          "repetition": 3,
+          "selected_nodes": 511,
+          "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+          "wall_seconds": 0.0001960000954568386
+        }
+      ],
+      "selected_nodes": 511,
+      "selected_nodes_sha256": "56fa2e50fb265c98110fc529da60d650ceecc5cc4ede6318fd5d01f1c548b928",
+      "size": 512,
+      "speedup_baseline_over_optimized": 68.24505627326305,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39698432,
+            "median": 39632896,
+            "minimum": 39632896
+          },
+          "wall_seconds": {
+            "maximum": 0.012448583962395787,
+            "median": 0.012403542059473693,
+            "minimum": 0.01230062497779727
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39567360,
+            "median": 39550976,
+            "minimum": 39550976
+          },
+          "wall_seconds": {
+            "maximum": 0.0001960000954568386,
+            "median": 0.000181750045157969,
+            "minimum": 0.00017462496180087328
+          }
+        }
+      },
+      "topology": "overlapping_roots"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 511,
+        "nodes": 512,
+        "seeds": 128,
+        "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+      },
+      "parity_verified": true,
+      "query": "root_family",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39649280,
+          "repetition": 1,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.014508166001178324
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39747584,
+          "repetition": 1,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.00032420794013887644
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39649280,
+          "repetition": 2,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.0003318340750411153
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39682048,
+          "repetition": 2,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.01453979208599776
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39813120,
+          "repetition": 3,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.014466124936006963
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 511,
+            "nodes": 512,
+            "seeds": 128,
+            "sha256": "41beaf14399f332058114cac02f7a837a4c74537e5e6e8ab3676dd6280f32b21"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39567360,
+          "repetition": 3,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.0003346669254824519
+        }
+      ],
+      "selected_nodes": 512,
+      "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+      "size": 512,
+      "speedup_baseline_over_optimized": 43.72114587503022,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39813120,
+            "median": 39682048,
+            "minimum": 39649280
+          },
+          "wall_seconds": {
+            "maximum": 0.01453979208599776,
+            "median": 0.014508166001178324,
+            "minimum": 0.014466124936006963
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39747584,
+            "median": 39649280,
+            "minimum": 39567360
+          },
+          "wall_seconds": {
+            "maximum": 0.0003346669254824519,
+            "median": 0.0003318340750411153,
+            "minimum": 0.00032420794013887644
+          }
+        }
+      },
+      "topology": "overlapping_roots"
+    },
+    {
+      "input": {
+        "directed": false,
+        "edges": 124,
+        "nodes": 128,
+        "seeds": 64,
+        "sha256": "ba7183f6b0b67438e633a072bfe3ed6874188e48a12b43567b65264bdfb88fa5"
+      },
+      "parity_verified": true,
+      "query": "component",
+      "runs": [
+        {
+          "input": {
+            "directed": false,
+            "edges": 124,
+            "nodes": 128,
+            "seeds": 64,
+            "sha256": "ba7183f6b0b67438e633a072bfe3ed6874188e48a12b43567b65264bdfb88fa5"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39321600,
+          "repetition": 1,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.001948291901499033
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 124,
+            "nodes": 128,
+            "seeds": 64,
+            "sha256": "ba7183f6b0b67438e633a072bfe3ed6874188e48a12b43567b65264bdfb88fa5"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39108608,
+          "repetition": 1,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 8.254195563495159e-05
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 124,
+            "nodes": 128,
+            "seeds": 64,
+            "sha256": "ba7183f6b0b67438e633a072bfe3ed6874188e48a12b43567b65264bdfb88fa5"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39124992,
+          "repetition": 2,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 8.141598664224148e-05
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 124,
+            "nodes": 128,
+            "seeds": 64,
+            "sha256": "ba7183f6b0b67438e633a072bfe3ed6874188e48a12b43567b65264bdfb88fa5"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39469056,
+          "repetition": 2,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.0020144169684499502
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 124,
+            "nodes": 128,
+            "seeds": 64,
+            "sha256": "ba7183f6b0b67438e633a072bfe3ed6874188e48a12b43567b65264bdfb88fa5"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39272448,
+          "repetition": 3,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 0.002040292019955814
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 124,
+            "nodes": 128,
+            "seeds": 64,
+            "sha256": "ba7183f6b0b67438e633a072bfe3ed6874188e48a12b43567b65264bdfb88fa5"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39141376,
+          "repetition": 3,
+          "selected_nodes": 128,
+          "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+          "wall_seconds": 6.479199510067701e-05
+        }
+      ],
+      "selected_nodes": 128,
+      "selected_nodes_sha256": "4497d32c822ad4ae57132a3462f6a0630d5d4a7863915c4ee08634841c4fee9f",
+      "size": 128,
+      "speedup_baseline_over_optimized": 24.74227791774742,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39469056,
+            "median": 39321600,
+            "minimum": 39272448
+          },
+          "wall_seconds": {
+            "maximum": 0.002040292019955814,
+            "median": 0.0020144169684499502,
+            "minimum": 0.001948291901499033
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39141376,
+            "median": 39124992,
+            "minimum": 39108608
+          },
+          "wall_seconds": {
+            "maximum": 8.254195563495159e-05,
+            "median": 8.141598664224148e-05,
+            "minimum": 6.479199510067701e-05
+          }
+        }
+      },
+      "topology": "disjoint_components"
+    },
+    {
+      "input": {
+        "directed": false,
+        "edges": 252,
+        "nodes": 256,
+        "seeds": 128,
+        "sha256": "5b3abfdf38ff51c3563f2eff005452a1eefe1a39dc44ce07c62babb89856dc3b"
+      },
+      "parity_verified": true,
+      "query": "component",
+      "runs": [
+        {
+          "input": {
+            "directed": false,
+            "edges": 252,
+            "nodes": 256,
+            "seeds": 128,
+            "sha256": "5b3abfdf38ff51c3563f2eff005452a1eefe1a39dc44ce07c62babb89856dc3b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39452672,
+          "repetition": 1,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.007140791974961758
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 252,
+            "nodes": 256,
+            "seeds": 128,
+            "sha256": "5b3abfdf38ff51c3563f2eff005452a1eefe1a39dc44ce07c62babb89856dc3b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39321600,
+          "repetition": 1,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.00010066595859825611
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 252,
+            "nodes": 256,
+            "seeds": 128,
+            "sha256": "5b3abfdf38ff51c3563f2eff005452a1eefe1a39dc44ce07c62babb89856dc3b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39223296,
+          "repetition": 2,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.00011262495536357164
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 252,
+            "nodes": 256,
+            "seeds": 128,
+            "sha256": "5b3abfdf38ff51c3563f2eff005452a1eefe1a39dc44ce07c62babb89856dc3b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39501824,
+          "repetition": 2,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.007160375011153519
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 252,
+            "nodes": 256,
+            "seeds": 128,
+            "sha256": "5b3abfdf38ff51c3563f2eff005452a1eefe1a39dc44ce07c62babb89856dc3b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39452672,
+          "repetition": 3,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.007201959029771388
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 252,
+            "nodes": 256,
+            "seeds": 128,
+            "sha256": "5b3abfdf38ff51c3563f2eff005452a1eefe1a39dc44ce07c62babb89856dc3b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39141376,
+          "repetition": 3,
+          "selected_nodes": 256,
+          "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+          "wall_seconds": 0.00010499998461455107
+        }
+      ],
+      "selected_nodes": 256,
+      "selected_nodes_sha256": "be66c2867e103fa00c88539675e5cd95f52ec5e38d9038e6d3710539f6c0aec1",
+      "size": 256,
+      "speedup_baseline_over_optimized": 68.1940577176163,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39501824,
+            "median": 39452672,
+            "minimum": 39452672
+          },
+          "wall_seconds": {
+            "maximum": 0.007201959029771388,
+            "median": 0.007160375011153519,
+            "minimum": 0.007140791974961758
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39321600,
+            "median": 39223296,
+            "minimum": 39141376
+          },
+          "wall_seconds": {
+            "maximum": 0.00011262495536357164,
+            "median": 0.00010499998461455107,
+            "minimum": 0.00010066595859825611
+          }
+        }
+      },
+      "topology": "disjoint_components"
+    },
+    {
+      "input": {
+        "directed": false,
+        "edges": 508,
+        "nodes": 512,
+        "seeds": 256,
+        "sha256": "efc330bce8b085ac527cd5f717886cc9c6f797389ecbf714d3db8e7a8074842b"
+      },
+      "parity_verified": true,
+      "query": "component",
+      "runs": [
+        {
+          "input": {
+            "directed": false,
+            "edges": 508,
+            "nodes": 512,
+            "seeds": 256,
+            "sha256": "efc330bce8b085ac527cd5f717886cc9c6f797389ecbf714d3db8e7a8074842b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39747584,
+          "repetition": 1,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.028740375069901347
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 508,
+            "nodes": 512,
+            "seeds": 256,
+            "sha256": "efc330bce8b085ac527cd5f717886cc9c6f797389ecbf714d3db8e7a8074842b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39583744,
+          "repetition": 1,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.0001902909716591239
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 508,
+            "nodes": 512,
+            "seeds": 256,
+            "sha256": "efc330bce8b085ac527cd5f717886cc9c6f797389ecbf714d3db8e7a8074842b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39550976,
+          "repetition": 2,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.0001901660580188036
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 508,
+            "nodes": 512,
+            "seeds": 256,
+            "sha256": "efc330bce8b085ac527cd5f717886cc9c6f797389ecbf714d3db8e7a8074842b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39780352,
+          "repetition": 2,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.02901000005658716
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 508,
+            "nodes": 512,
+            "seeds": 256,
+            "sha256": "efc330bce8b085ac527cd5f717886cc9c6f797389ecbf714d3db8e7a8074842b"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 39682048,
+          "repetition": 3,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.0287095409585163
+        },
+        {
+          "input": {
+            "directed": false,
+            "edges": 508,
+            "nodes": 512,
+            "seeds": 256,
+            "sha256": "efc330bce8b085ac527cd5f717886cc9c6f797389ecbf714d3db8e7a8074842b"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39403520,
+          "repetition": 3,
+          "selected_nodes": 512,
+          "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+          "wall_seconds": 0.00018974998965859413
+        }
+      ],
+      "selected_nodes": 512,
+      "selected_nodes_sha256": "61f3f6fd3aa109e05aa31cc4d74f333d17c8f73ced22284db2209e96a39884af",
+      "size": 512,
+      "speedup_baseline_over_optimized": 151.1330432429719,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 39780352,
+            "median": 39747584,
+            "minimum": 39682048
+          },
+          "wall_seconds": {
+            "maximum": 0.02901000005658716,
+            "median": 0.028740375069901347,
+            "minimum": 0.0287095409585163
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39583744,
+            "median": 39550976,
+            "minimum": 39403520
+          },
+          "wall_seconds": {
+            "maximum": 0.0001902909716591239,
+            "median": 0.0001901660580188036,
+            "minimum": 0.00018974998965859413
+          }
+        }
+      },
+      "topology": "disjoint_components"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 31,
+        "nodes": 6,
+        "seeds": 0,
+        "sha256": "27a6a27d694547f220debaf78008e81f1e755083c69d48ea955ec9b6d0925a61"
+      },
+      "parity_verified": true,
+      "query": "cyclic_nodes",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 31,
+            "nodes": 6,
+            "seeds": 0,
+            "sha256": "27a6a27d694547f220debaf78008e81f1e755083c69d48ea955ec9b6d0925a61"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 105857024,
+          "repetition": 1,
+          "selected_nodes": 6,
+          "selected_nodes_sha256": "4e098021cf9ec15699efd082b803811ec67394af4b3ea324e86edbccc3cbeac3",
+          "wall_seconds": 0.0005771249998360872
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 31,
+            "nodes": 6,
+            "seeds": 0,
+            "sha256": "27a6a27d694547f220debaf78008e81f1e755083c69d48ea955ec9b6d0925a61"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39010304,
+          "repetition": 1,
+          "selected_nodes": 6,
+          "selected_nodes_sha256": "4e098021cf9ec15699efd082b803811ec67394af4b3ea324e86edbccc3cbeac3",
+          "wall_seconds": 2.2875028662383556e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 31,
+            "nodes": 6,
+            "seeds": 0,
+            "sha256": "27a6a27d694547f220debaf78008e81f1e755083c69d48ea955ec9b6d0925a61"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39223296,
+          "repetition": 2,
+          "selected_nodes": 6,
+          "selected_nodes_sha256": "4e098021cf9ec15699efd082b803811ec67394af4b3ea324e86edbccc3cbeac3",
+          "wall_seconds": 2.5166082195937634e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 31,
+            "nodes": 6,
+            "seeds": 0,
+            "sha256": "27a6a27d694547f220debaf78008e81f1e755083c69d48ea955ec9b6d0925a61"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 105824256,
+          "repetition": 2,
+          "selected_nodes": 6,
+          "selected_nodes_sha256": "4e098021cf9ec15699efd082b803811ec67394af4b3ea324e86edbccc3cbeac3",
+          "wall_seconds": 0.0005772080039605498
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 31,
+            "nodes": 6,
+            "seeds": 0,
+            "sha256": "27a6a27d694547f220debaf78008e81f1e755083c69d48ea955ec9b6d0925a61"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 105938944,
+          "repetition": 3,
+          "selected_nodes": 6,
+          "selected_nodes_sha256": "4e098021cf9ec15699efd082b803811ec67394af4b3ea324e86edbccc3cbeac3",
+          "wall_seconds": 0.0005528749898076057
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 31,
+            "nodes": 6,
+            "seeds": 0,
+            "sha256": "27a6a27d694547f220debaf78008e81f1e755083c69d48ea955ec9b6d0925a61"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39124992,
+          "repetition": 3,
+          "selected_nodes": 6,
+          "selected_nodes_sha256": "4e098021cf9ec15699efd082b803811ec67394af4b3ea324e86edbccc3cbeac3",
+          "wall_seconds": 2.1875021047890186e-05
+        }
+      ],
+      "selected_nodes": 6,
+      "selected_nodes_sha256": "4e098021cf9ec15699efd082b803811ec67394af4b3ea324e86edbccc3cbeac3",
+      "size": 6,
+      "speedup_baseline_over_optimized": 25.22947657701214,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 105938944,
+            "median": 105857024,
+            "minimum": 105824256
+          },
+          "wall_seconds": {
+            "maximum": 0.0005772080039605498,
+            "median": 0.0005771249998360872,
+            "minimum": 0.0005528749898076057
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39223296,
+            "median": 39124992,
+            "minimum": 39010304
+          },
+          "wall_seconds": {
+            "maximum": 2.5166082195937634e-05,
+            "median": 2.2875028662383556e-05,
+            "minimum": 2.1875021047890186e-05
+          }
+        }
+      },
+      "topology": "dense_scc"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 43,
+        "nodes": 7,
+        "seeds": 0,
+        "sha256": "8e50b54015bb7c78a7ab9ecccc29d4340e91780cc65794a98add1c95db64e919"
+      },
+      "parity_verified": true,
+      "query": "cyclic_nodes",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 43,
+            "nodes": 7,
+            "seeds": 0,
+            "sha256": "8e50b54015bb7c78a7ab9ecccc29d4340e91780cc65794a98add1c95db64e919"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 105873408,
+          "repetition": 1,
+          "selected_nodes": 7,
+          "selected_nodes_sha256": "d71a595b6e83e7180caf80e813a0e1b08c48963fd436c20da78927c8f489902a",
+          "wall_seconds": 0.001948749995790422
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 43,
+            "nodes": 7,
+            "seeds": 0,
+            "sha256": "8e50b54015bb7c78a7ab9ecccc29d4340e91780cc65794a98add1c95db64e919"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39223296,
+          "repetition": 1,
+          "selected_nodes": 7,
+          "selected_nodes_sha256": "d71a595b6e83e7180caf80e813a0e1b08c48963fd436c20da78927c8f489902a",
+          "wall_seconds": 4.237494431436062e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 43,
+            "nodes": 7,
+            "seeds": 0,
+            "sha256": "8e50b54015bb7c78a7ab9ecccc29d4340e91780cc65794a98add1c95db64e919"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39256064,
+          "repetition": 2,
+          "selected_nodes": 7,
+          "selected_nodes_sha256": "d71a595b6e83e7180caf80e813a0e1b08c48963fd436c20da78927c8f489902a",
+          "wall_seconds": 3.0415947549045086e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 43,
+            "nodes": 7,
+            "seeds": 0,
+            "sha256": "8e50b54015bb7c78a7ab9ecccc29d4340e91780cc65794a98add1c95db64e919"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 105889792,
+          "repetition": 2,
+          "selected_nodes": 7,
+          "selected_nodes_sha256": "d71a595b6e83e7180caf80e813a0e1b08c48963fd436c20da78927c8f489902a",
+          "wall_seconds": 0.001973833073861897
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 43,
+            "nodes": 7,
+            "seeds": 0,
+            "sha256": "8e50b54015bb7c78a7ab9ecccc29d4340e91780cc65794a98add1c95db64e919"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 105889792,
+          "repetition": 3,
+          "selected_nodes": 7,
+          "selected_nodes_sha256": "d71a595b6e83e7180caf80e813a0e1b08c48963fd436c20da78927c8f489902a",
+          "wall_seconds": 0.0019437079317867756
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 43,
+            "nodes": 7,
+            "seeds": 0,
+            "sha256": "8e50b54015bb7c78a7ab9ecccc29d4340e91780cc65794a98add1c95db64e919"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39059456,
+          "repetition": 3,
+          "selected_nodes": 7,
+          "selected_nodes_sha256": "d71a595b6e83e7180caf80e813a0e1b08c48963fd436c20da78927c8f489902a",
+          "wall_seconds": 2.8416980057954788e-05
+        }
+      ],
+      "selected_nodes": 7,
+      "selected_nodes_sha256": "d71a595b6e83e7180caf80e813a0e1b08c48963fd436c20da78927c8f489902a",
+      "size": 7,
+      "speedup_baseline_over_optimized": 64.07000776971037,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 105889792,
+            "median": 105889792,
+            "minimum": 105873408
+          },
+          "wall_seconds": {
+            "maximum": 0.001973833073861897,
+            "median": 0.001948749995790422,
+            "minimum": 0.0019437079317867756
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39256064,
+            "median": 39223296,
+            "minimum": 39059456
+          },
+          "wall_seconds": {
+            "maximum": 4.237494431436062e-05,
+            "median": 3.0415947549045086e-05,
+            "minimum": 2.8416980057954788e-05
+          }
+        }
+      },
+      "topology": "dense_scc"
+    },
+    {
+      "input": {
+        "directed": true,
+        "edges": 57,
+        "nodes": 8,
+        "seeds": 0,
+        "sha256": "4caafd77276aa0c3b74bcb2020239639d82115c5c394697e1248545931d0eba3"
+      },
+      "parity_verified": true,
+      "query": "cyclic_nodes",
+      "runs": [
+        {
+          "input": {
+            "directed": true,
+            "edges": 57,
+            "nodes": 8,
+            "seeds": 0,
+            "sha256": "4caafd77276aa0c3b74bcb2020239639d82115c5c394697e1248545931d0eba3"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 105922560,
+          "repetition": 1,
+          "selected_nodes": 8,
+          "selected_nodes_sha256": "29101ebf1ead685029508789eee51c4d4fff65524064d8e32a48efded7036982",
+          "wall_seconds": 0.011680666008032858
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 57,
+            "nodes": 8,
+            "seeds": 0,
+            "sha256": "4caafd77276aa0c3b74bcb2020239639d82115c5c394697e1248545931d0eba3"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39043072,
+          "repetition": 1,
+          "selected_nodes": 8,
+          "selected_nodes_sha256": "29101ebf1ead685029508789eee51c4d4fff65524064d8e32a48efded7036982",
+          "wall_seconds": 2.9708025977015495e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 57,
+            "nodes": 8,
+            "seeds": 0,
+            "sha256": "4caafd77276aa0c3b74bcb2020239639d82115c5c394697e1248545931d0eba3"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39190528,
+          "repetition": 2,
+          "selected_nodes": 8,
+          "selected_nodes_sha256": "29101ebf1ead685029508789eee51c4d4fff65524064d8e32a48efded7036982",
+          "wall_seconds": 2.8667040169239044e-05
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 57,
+            "nodes": 8,
+            "seeds": 0,
+            "sha256": "4caafd77276aa0c3b74bcb2020239639d82115c5c394697e1248545931d0eba3"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 106070016,
+          "repetition": 2,
+          "selected_nodes": 8,
+          "selected_nodes_sha256": "29101ebf1ead685029508789eee51c4d4fff65524064d8e32a48efded7036982",
+          "wall_seconds": 0.011870749993249774
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 57,
+            "nodes": 8,
+            "seeds": 0,
+            "sha256": "4caafd77276aa0c3b74bcb2020239639d82115c5c394697e1248545931d0eba3"
+          },
+          "method": "baseline",
+          "peak_rss_bytes": 105971712,
+          "repetition": 3,
+          "selected_nodes": 8,
+          "selected_nodes_sha256": "29101ebf1ead685029508789eee51c4d4fff65524064d8e32a48efded7036982",
+          "wall_seconds": 0.011693082982674241
+        },
+        {
+          "input": {
+            "directed": true,
+            "edges": 57,
+            "nodes": 8,
+            "seeds": 0,
+            "sha256": "4caafd77276aa0c3b74bcb2020239639d82115c5c394697e1248545931d0eba3"
+          },
+          "method": "optimized",
+          "peak_rss_bytes": 39092224,
+          "repetition": 3,
+          "selected_nodes": 8,
+          "selected_nodes_sha256": "29101ebf1ead685029508789eee51c4d4fff65524064d8e32a48efded7036982",
+          "wall_seconds": 4.2041996493935585e-05
+        }
+      ],
+      "selected_nodes": 8,
+      "selected_nodes_sha256": "29101ebf1ead685029508789eee51c4d4fff65524064d8e32a48efded7036982",
+      "size": 8,
+      "speedup_baseline_over_optimized": 393.6001332340609,
+      "summary": {
+        "baseline": {
+          "peak_rss_bytes": {
+            "maximum": 106070016,
+            "median": 105971712,
+            "minimum": 105922560
+          },
+          "wall_seconds": {
+            "maximum": 0.011870749993249774,
+            "median": 0.011693082982674241,
+            "minimum": 0.011680666008032858
+          }
+        },
+        "optimized": {
+          "peak_rss_bytes": {
+            "maximum": 39190528,
+            "median": 39092224,
+            "minimum": 39043072
+          },
+          "wall_seconds": {
+            "maximum": 4.2041996493935585e-05,
+            "median": 2.9708025977015495e-05,
+            "minimum": 2.8667040169239044e-05
+          }
+        }
+      },
+      "topology": "dense_scc"
+    }
+  ],
+  "created_at": "2026-10-04T03:36:12.722334+00:00",
+  "environment": {
+    "machine": "arm64",
+    "networkx": "3.3",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.9"
+  },
+  "implementation_sha256": {
+    "benchmark_queries.py": "1e42335f77178d5e3e78f3b2112e48ab0ac40e70395500a6f5ad65ab683b8001",
+    "queries.py": "5c690469ee8f9406e5a353df97c61bd4af6cb85ed92ec9ad2eddd959cc6d1dcb"
+  },
+  "measurement_scope": {
+    "aggregation": "median/minimum/maximum of independent processes; methods alternate order per repetition; all individual runs retained",
+    "interpretation": "bounded synthetic workloads, not full-dataset performance; times are sensitive to host load; one warmup reduces lazy initialization effects but does not eliminate measurement noise",
+    "parity": "every run must match graph+seed SHA-256, selected-node count and selected-set SHA-256 before speedup is emitted",
+    "peak_rss_bytes": "fresh worker process high-water RSS including interpreter, imports, input construction, warmup, query and fingerprint validation; not incremental query memory; macOS bytes, Linux KiB converted to bytes; no tracemalloc",
+    "wall_seconds": "perf_counter around one query including materialization of its selected-node set; excludes graph construction, input/result fingerprints, subprocess startup, one untimed query warmup and the garbage collection immediately following that warmup"
+  },
+  "parameters": {
+    "cycle_sizes": [
+      6,
+      7,
+      8
+    ],
+    "repeats": 3,
+    "sizes": [
+      128,
+      256,
+      512
+    ],
+    "warmup_queries_per_worker": 1,
+    "worker_timeout_seconds": 20
+  },
+  "schema_version": 1
+}

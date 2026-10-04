@@ -4,5 +4,9 @@ recursive-include examples *.tsv *.md
 recursive-include experiments *.py *.md
 include notebooks/verified_analysis.ipynb
 include scripts/execute_analysis_notebook.py
+include scripts/build_portfolio_figures.py changelog.md
+recursive-include docs/figures *.png *.json
+include notebooks/README.md
+recursive-include notebooks/historical *.md *.ipynb
 recursive-include reports *.md *.json *.csv *.png
 include data/data_source.md data/data_source_readme.txt

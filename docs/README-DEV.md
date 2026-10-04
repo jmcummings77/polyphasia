@@ -12,7 +12,7 @@ Use Python 3.12 and [uv](https://docs.astral.sh/uv/). Run commands from the repo
 uv sync --frozen
 ```
 
-This installs the package and development tools from the lockfile. The core's runtime dependencies are pandas and NetworkX; Jupyter and visualization packages are optional. Neither tests nor the [quick-start example](../README.md#one-minute-introduction) require the full dataset.
+This installs the package and development tools from the lockfile. The core's runtime dependencies are pandas and NetworkX; Jupyter and visualization packages are optional. Neither tests nor the [quick-start example](../README.md#try-a-meaningful-query) require the full dataset.
 
 ## Run the checks
 
@@ -64,7 +64,9 @@ uv build
 The wheel contains only `polyphasia`; install `polyphasia[analysis]` to render the
 workflow's figures. The source distribution also includes examples, tests,
 experiments, the verified notebook with its execution script, and the recorded
-full-run snapshot with source attribution. Raw data is excluded.
+full-run snapshot with source attribution. It also includes the portfolio figure
+builder and figures, published benchmark measurements, and the labeled historical
+notebook archive. Raw data is excluded.
 
 ## Choose where code belongs
 
