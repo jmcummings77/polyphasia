@@ -95,6 +95,9 @@ of all reachable English descendants nor estimates of historical influence.
 `affix_like` flags only a literal leading or trailing hyphen: inspect the labels
 before assigning a linguistic interpretation.
 
+Figure labels are literal source text. Dollar signs and backslashes do not
+activate mathematical formatting or external TeX rendering.
+
 `--word` takes an exact label and can be repeated. Each trace uses a deterministic
 reverse breadth-first search for a nearest zero-indegree root, then reports one
 root-to-word path with up to five contributing assertions per edge. Other paths

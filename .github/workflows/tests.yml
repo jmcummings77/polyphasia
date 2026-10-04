@@ -55,17 +55,26 @@ jobs:
     - name: Smoke test installed wheel outside the checkout
       run: |
         cd "$(mktemp -d)"
-        uv run --isolated --no-project --python 3.12 --with "$GITHUB_WORKSPACE"/dist/*.whl python - <<'PY'
+        uv run --isolated --no-project --refresh-package polyphasia --python 3.12 --with "$GITHUB_WORKSPACE"/dist/*.whl python - <<'PY'
         import os
         from pathlib import Path
+        import polyphasia
+        from polyphasia.assertions import prepare_assertions, project_assertions
         from polyphasia.graph import DirectedGraph
         from polyphasia.loader import clean_data_frame, load_to_pandas
+        from polyphasia.queries import ancestor_subgraph, root_family_subgraph
 
-        source = Path(os.environ["GITHUB_WORKSPACE"]) / "examples" / "sample.tsv"
+        workspace = Path(os.environ["GITHUB_WORKSPACE"])
+        assert not Path(polyphasia.__file__).resolve().is_relative_to(workspace)
+        source = workspace / "examples" / "sample.tsv"
         graph = DirectedGraph(clean_data_frame(load_to_pandas(source)))
         assert graph.info == "DiGraph with 4 nodes and 3 edges"
         assert graph.is_dag
         assert graph.language_subgraph().number_of_edges() == 3
+        projected = project_assertions(prepare_assertions(load_to_pandas(source)), policy="normalized")
+        assert set(ancestor_subgraph(projected, ["eng: example"])) == {"lat: exemplum", "eng: example"}
+        assert len(root_family_subgraph(projected, ["eng: example"])) == 4
+        assert projected["lat: exemplum"]["eng: example"]["assertion_ids"] == (1,)
         PY
 
   Notebook:

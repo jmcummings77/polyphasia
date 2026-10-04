@@ -41,6 +41,10 @@ thresholds. See [query benchmarks](query-benchmarks.md).
 
 CI runs the checks above, builds distributions, and runs the sample against an installed wheel outside the checkout. The coverage gate is 90% across core statements and branches.
 
+The wheel smoke check refreshes the package to avoid reusing an older build with
+the same version. It checks both legacy graph behavior and the assertion/query
+example, and verifies that imports come from outside the source checkout.
+
 A separate CI job generates the [synthetic analysis fixture](../examples/README.md)
 and executes `notebooks/verified_analysis.ipynb` in a fresh Python kernel. It
 validates artifact checksums, renders the saved figures, and exercises source

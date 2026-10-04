@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Fixed
+
+* Reject embedded NUL bytes before TSV parsing can silently truncate source
+  fields; apply the same rule to direct DataFrame inputs.
+* Render source labels literally in analysis figures, including dollar signs
+  and backslashes, without activating mathematical or TeX formatting.
+* Verify benchmark graph and result identities against their declared cases
+  before plotting, so measurements cannot be relabeled with another input size.
+
 ### Added
 
 * Assertion preparation and graph projections that retain original source fields,
