@@ -1,0 +1,31 @@
+{
+  "artifacts": {
+    "projection-comparison.png": {
+      "bytes": 96067,
+      "sha256": "1991c8f1d47b34ce06d0645a0b080d7223b40fd2e9739ab37069d67347bd125f"
+    },
+    "runtime-memory-scaling.png": {
+      "bytes": 129802,
+      "sha256": "e84e685bb1e867c67a9d3f8b7fbcb3af303e0adbce656b9f887d6b26b9e7318b"
+    },
+    "transformation-attrition.png": {
+      "bytes": 63819,
+      "sha256": "90a9a4231177157ed9d780acd9e186016cff6501680385d2f1c983e35c4b9f19"
+    }
+  },
+  "environment": {
+    "freetype": "2.6.1",
+    "matplotlib": "3.9.0",
+    "numpy": "1.26.0",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "python": "3.12.9"
+  },
+  "input_sha256": {
+    "analysis.json": "10dacc2344774e307dd18912b230945b9d86e7c8db4eb8d5388f6f6a39b7d4d5",
+    "audit.json": "506b83d38edbd7dbbfcd2f5188a1f48b54e2d9f3d45c5aea44dcaae5965e2119",
+    "manifest.json": "db658d13f35c25cc5d34b0724697abad8594a23933e9bd31892c105674ee1d21",
+    "query-benchmark.json": "aa2a528d6466d09e8afc5d731a7a62cf683461163788910156b9babb2a52a290"
+  },
+  "renderer_sha256": "30954e8791ecc385d1331f50b7062b5162b3221f08451c7091b40398d44bb3a8",
+  "schema_version": 1
+}

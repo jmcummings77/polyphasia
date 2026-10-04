@@ -7,6 +7,10 @@ It targets repeated traversal of overlapping paths/components and exhaustive
 cycle enumeration. It does not compare ancestor selection with root-family
 selection: those answer different questions.
 
+The [published JSON](../reports/benchmarks/query-benchmark.json) preserves all
+90 measurements from the recorded run. Its [provenance notes](../reports/benchmarks/README.md)
+identify the exact bytes, measured source, and publication checks.
+
 ## Reproduce the comparisons
 
 From the repository root on Linux or macOS:
@@ -108,14 +112,41 @@ cycle enumeration initialized the installed pandas/NumPy/SciPy stack during
 warmup, while SCC membership did not. Which optional libraries are installed can
 therefore change the process-memory comparison.
 
-The local report, `data/processed/query-benchmark.json`, retains every run and
-the intermediate sizes. Its implementation SHA-256 values are:
+The [published report](../reports/benchmarks/query-benchmark.json) retains every
+run and the intermediate sizes. It is an unchanged copy of the original local
+report, with SHA-256
+`aa2a528d6466d09e8afc5d731a7a62cf683461163788910156b9babb2a52a290`.
+Its implementation SHA-256 values are:
 
 ```text
 benchmark_queries.py  1e42335f77178d5e3e78f3b2112e48ab0ac40e70395500a6f5ad65ab683b8001
 queries.py            5c690469ee8f9406e5a353df97c61bd4af6cb85ed92ec9ad2eddd959cc6d1dcb
 ```
 
-The ignored report is not needed to rerun the suite. The command above generates
-a fresh report, including fingerprints, timings, and memory measurements for
-the current implementation and environment.
+The command above generates a fresh report in an ignored directory, including
+fingerprints, timings, and memory measurements for the current implementation
+and environment. Preserve the published measurements when comparing later runs.
+
+## Render the published measurements
+
+![Recorded runtime and process-memory scaling](figures/runtime-memory-scaling.png)
+
+This figure uses the recorded root-family and component comparisons at 128,
+256, and 512 nodes. The timing panels use logarithmic millisecond axes; shaded
+bands show the minimum and maximum of three workers around the median. The memory
+panels show process peak RSS in MiB, with the measurement boundary above.
+
+To regenerate the portfolio figures from the published reports, without running
+the benchmark again:
+
+```sh
+uv run --frozen --extra analysis python -m scripts.build_portfolio_figures \
+  --analysis reports/20130208 \
+  --benchmark reports/benchmarks/query-benchmark.json \
+  --output data/processed/portfolio-figures
+```
+
+The output directory must be new. The renderer validates the report inputs and
+writes `runtime-memory-scaling.png` alongside two corpus-analysis figures and
+a rendering manifest. See the [renderer](../scripts/build_portfolio_figures.py)
+and [published benchmark notes](../reports/benchmarks/README.md).
