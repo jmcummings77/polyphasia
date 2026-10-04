@@ -19,8 +19,8 @@ This installs the package and development tools from the lockfile. The core's ru
 Run the tests directly, or use the script for the same suite with coverage:
 
 ```bash
-uv run pytest
-uv run ./run_tests.sh
+uv run --extra analysis pytest
+uv run --extra analysis ./run_tests.sh
 ```
 
 Run formatting, lint, type, and whitespace checks:
@@ -29,7 +29,10 @@ Run formatting, lint, type, and whitespace checks:
 uv run pre-commit run --all-files
 ```
 
-Tests cover small TSV inputs, graph behavior, and local experimental CSV generation. Historical notebooks and live Neo4j imports are outside the automated test suite.
+The full test suite uses the optional `analysis` extra for figure generation.
+Tests cover small TSV inputs, graph behavior, reproducible analysis artifacts,
+and local experimental CSV generation. Historical notebooks and live Neo4j
+imports are outside the automated test suite.
 
 Query tests include independently specified selections and comparisons against
 NetworkX on small generated cyclic graphs and DAGs. The benchmark CLI has a small
@@ -37,6 +40,11 @@ worker-process smoke test; full benchmark runs are manual and have no CI timing
 thresholds. See [query benchmarks](query-benchmarks.md).
 
 CI runs the checks above, builds distributions, and runs the sample against an installed wheel outside the checkout. The coverage gate is 90% across core statements and branches.
+
+A separate CI job generates the [synthetic analysis fixture](../examples/README.md)
+and executes `notebooks/verified_analysis.ipynb` in a fresh Python kernel. It
+validates artifact checksums, renders the saved figures, and exercises source
+traces. The full corpus is run separately and is not a CI dependency.
 
 ## Update dependencies and build
 
@@ -53,10 +61,15 @@ Build the source distribution and wheel:
 uv build
 ```
 
-The wheel contains only `polyphasia`. The source distribution also includes the example, tests, and experiments.
+The wheel contains only `polyphasia`; install `polyphasia[analysis]` to render the
+workflow's figures. The source distribution also includes examples, tests,
+experiments, and the verified notebook with its execution script.
 
 ## Choose where code belongs
 
-Keep reusable loading and graph logic in `polyphasia/`, and add regression tests for behavior changes. Put analysis-specific workflows in `experiments/` or `notebooks/`. New workflows should accept explicit input and output paths and avoid file or database operations at import time.
+Keep reusable loading, graph logic, and verified analysis contracts in
+`polyphasia/`, and add regression tests for behavior changes. Put ad hoc workflows
+in `experiments/` or `notebooks/`. Workflows should accept explicit input and
+output paths and avoid file or database operations at import time.
 
 The version 0.1 API is still evolving. Update the [data-format reference](data-format.md) or [graph reference](graph-behavior.md) when behavior changes, and preserve the distinction between tested package behavior and research assumptions.

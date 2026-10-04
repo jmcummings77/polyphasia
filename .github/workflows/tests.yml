@@ -47,9 +47,9 @@ jobs:
         enable-cache: true
         cache-dependency-glob: uv.lock
     - name: Install dependencies
-      run: uv sync --frozen
+      run: uv sync --frozen --extra analysis
     - name: Test
-      run: uv run --frozen ./run_tests.sh
+      run: uv run --frozen --extra analysis ./run_tests.sh
     - name: Build distributions
       run: uv build
     - name: Smoke test installed wheel outside the checkout
@@ -67,3 +67,41 @@ jobs:
         assert graph.is_dag
         assert graph.language_subgraph().number_of_edges() == 3
         PY
+
+  Notebook:
+    needs: Linting
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+        cache-dependency-glob: uv.lock
+    - name: Install notebook dependencies
+      run: uv sync --frozen --extra notebooks
+    - name: Generate synthetic analysis artifacts
+      run: >-
+        uv run --frozen --extra notebooks python -m polyphasia.analysis
+        examples/analysis-fixture.tsv --output .analysis-ci/run
+        --language eng --word 'eng: examples' --word 'eng: loop-leaf'
+        --input-kind synthetic --dataset-version synthetic-v1
+    - name: Execute analysis notebook in a fresh kernel
+      run: >-
+        uv run --frozen --extra notebooks python scripts/execute_analysis_notebook.py
+        --artifacts .analysis-ci/run
+        --output .analysis-ci/verified_analysis.executed.ipynb
+    - name: Upload analysis evidence
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: synthetic-analysis
+        path: .analysis-ci/
+        include-hidden-files: true
+        if-no-files-found: warn
