@@ -1,61 +1,88 @@
 # polyphasia
 
-=============================
+Etymological WordNet graph analysis with pandas and NetworkX.
 
-## Short Description
+`polyphasia` began as an exploration of relationships extracted from Wiktionary. Its reusable core now has automated tests and a small example that runs without downloading the full dataset. It remains a version 0.1 research project: the notebooks preserve exploratory work, and the public API may change.
 
-Etymological WordNet dataset graph analysis project.
+## Quick start
 
-## Overview
+Use Python 3.12 and [uv](https://docs.astral.sh/uv/). From the repository root:
 
-This is a project to evaluate an etymology dataset parsed from Wiktionary.org using graph analysis tools. It is mostly an unstructured investigation to see what I can make of the data.
+```bash
+uv sync --frozen
+uv run python - <<'PY'
+from pathlib import Path
 
-The source data can be downloaded [from the author's website here](https://cs.rutgers.edu/~gd343/downloads/etymwn-20130208.zip).
+from polyphasia.graph import DirectedGraph
+from polyphasia.loader import clean_data_frame, load_to_pandas
 
-Initial data parsing and cleaning is handled with pandas, and the lovely networkx package does most of the heavy lifting for the graph algorithms.
+edges = clean_data_frame(load_to_pandas(Path("examples/sample.tsv")))
+graph = DirectedGraph(edges)
+print(graph.info)    # DiGraph with 4 nodes and 3 edges
+print(graph.is_dag)  # True
+PY
+uv run pytest
+```
 
-I chose `polyphasia` (Gk., much speech) as the name because of its etymological mirroring of `aphasia` (Gk., without speech), rather than its relevance for signal processing or biological types of sleep.
+The example contains three synthetic relationships for demonstrating the API; it is not a linguistic reference. Tests use small fixtures and require no external dataset, database, or notebook environment.
 
-## Data notes
+## What is reusable?
 
-The data are stored in a three column TSV file with no headers that is about 300mb uncompressed, with around 6m etymological relationships stored. The columns are the source word, the type of relationship, and the target word. Each source and target word is tagged with a language prefix followed by a colon, e.g. "eng: example". The type of relationship indicates how the words are etymologically related.
+| Location | Purpose and validation boundary |
+| --- | --- |
+| `polyphasia/` | Tested TSV loading, cleaning, relationship constants, and directed/undirected graph helpers. Runtime dependencies are pandas and NetworkX. |
+| `examples/sample.tsv` | A small input for the quick start and manual exploration. |
+| `notebooks/` | Historical analysis and visualizations. These depend on the full dataset and optional notebook packages; they are not exercised by the automated test suite. |
+| `experiments/neo4j_export.py` | Experimental CSV export with an explicit input path and output directory. Local file generation is tested; importing into a running Neo4j database is not. |
+
+For development and notebook setup, see [the developer guide](docs/README-DEV.md).
+
+## Loading and cleaning data
+
+Input is a headerless TSV with three columns: source node, relationship type, and target node. Each endpoint uses a language prefix followed by `: ` and a word:
 
 ```tsv
 aaq: Pawanobskewi	rel:etymological_origin_of	eng: Penobscot
 ```
 
-I have not been able to find good documentation on the exact definitions of the etymological relationships, but after exploring the data set on the author's website, I can infer everything I need to know about them.
+`load_to_pandas(path)` reads those columns as `source_node`, `edge_type`, and `target_node`. Prefer an explicit path; without one, it reads `data/raw/etymologies.tsv` relative to the current working directory.
 
-Relationships are recorded bidirectionally. Meaning, a root word will link to its derivatives, and each derivative will link back to the root. To simplify the graph, I drop edges that point from derivatives to roots, since that information is already encoded in the root-to-leaf edge and networkx can handle bidirectional traversal without requiring multiple edges to link the same pair of nodes (and I don't want to live with all the complexity of a multigraph anyway).
+`clean_data_frame(frame)` returns a copy with `source_language`, `source_word`, `target_language`, and `target_word` columns. It splits each endpoint at the first `: `, preserving any later colons or punctuation in the word. Malformed endpoints raise `ValueError`. An empty input, including a result with no retained relationships, produces a valid empty frame.
 
-Below are the types of relationships extracted from the data, with comments indicating their directionality.
+Cleaning normalizes the known relationship aliases in `edge_type` only. By default it keeps the root-to-leaf relationship types below. Pass `drop_rel_types=False` to retain all relationship types after alias normalization; this does not reverse their direction or infer missing relationships.
 
-<- A is the source of B
+| Relationship type | Direction used by this project |
+| --- | --- |
+| `rel:etymological_origin_of` | Root to leaf; retained by default |
+| `rel:has_derived_form` | Root to leaf; retained by default |
+| `rel:etymology` | Leaf to root |
+| `rel:is_derived_from` | Leaf to root |
+| `rel:etymologically_related` | Related without a root-to-leaf direction |
+| `rel:variant:orthography` | Orthographic variants without a root-to-leaf direction |
 
--> B is the source of A
+The aliases `rel:etymologically` and `rel:derived` map to `rel:etymologically_related` and `rel:is_derived_from`, respectively. These classifications reflect the original analysis; they are not a complete linguistic model or a guarantee that every reverse relationship exists in the source data.
 
-| relationship type | directionality | description |
-| ----------- | ----------- | ----------- |
-| "rel:etymology" | -> | indicates that the target word is an etymological root for the source word |
-| "rel:etymological_origin_of" |  <- | indicates that the source word is an etymological root for the target word |
-| "rel:is_derived_from" |  -> | indicates that the target word is part of a phrase derived from the source word |
-| "rel:has_derived_form"  | <- | indicates that the source word is part of a phrase derived from the target word |
-| "rel:etymologically_related"  | <-> | indicates that the two words share at least some common etymological root but does not indicate directionality |
-| "rel:variant:orthography" | <-> | indicates that the two words are orthographic (spelling/written representation basically) variations of each other, so, e.g., `Chanukah` and `Hanukkah` |
+The historical dataset is available [from the author's website](https://cs.rutgers.edu/~gd343/downloads/etymwn-20130208.zip). It is approximately 300 MB uncompressed and contains about six million relationships. The download is only needed for full-data exploration.
 
-The source data also includes a handful of malformed values, which should be dropped or replaced.
+## Graph behavior and limits
 
-| malformed type | corrected type |
-| ----------- | ----------- |
-| "rel:etymologically" | "rel:etymologically_related" |
-| "rel:derived" | "rel:is_derived_from" |
+`DirectedGraph` follows the retained source-to-target edges. Its language families include a root and all of that root's descendants when any member has the requested language prefix. `UndirectedGraph.language_subgraph()` includes entire connected components containing a node in that language. Language matching uses the complete prefix before `: `.
 
-## TODO
+Both wrappers use simple graphs, so repeated edges between the same pair of nodes collapse. Directed root-family selection does not cover components with no roots. Longest-path analysis requires a DAG, and `remove_cycles()` removes all nodes participating in cycles, including their other incident edges. Cycle enumeration can be expensive on the full dataset. These are analysis choices to consider before using the helpers for other graph problems.
 
-- [x] Investigate difference between BFS and DAG approaches to filtering graph to English-related nodes
-- [ ] Improve pipeline for loading data into Neo4j
-- [ ] Improve visualizations
-- [ ] Add tests to classes
-- [ ] Improve logging
-- [ ] Set up infrastructure to run on server instead of abusing my laptop
-- [ ] Clean up CI/CD infrastructure so it actually runs the tests, linting, and precommit hooks
+## Experimental Neo4j export
+
+Choose the source TSV and a local output directory explicitly:
+
+```bash
+uv run python -m experiments.neo4j_export examples/sample.tsv data/processed/neo4j-export
+```
+
+The exporter writes CSV files for further experimentation. It does not connect to a database. The export schema and a complete Neo4j import workflow are experimental.
+
+## Research roadmap
+
+- Validate relationship directionality and information loss from filtering on the full dataset.
+- Develop and verify a complete Neo4j import workflow.
+- Refresh the historical visualizations and make notebooks reproducible end to end.
+- Measure memory use and graph-algorithm performance on the full dataset.

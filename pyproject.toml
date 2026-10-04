@@ -1,7 +1,7 @@
 [project]
 name = "polyphasia"
 version = "0.1.0"
-description = "WordNet dataset EDA package."
+description = "Etymological WordNet TSV parsing and graph analysis."
 authors = [
     { name = "John-Michael Cummings", email = "JMCummings77@gmail.com" },
 ]
@@ -10,13 +10,16 @@ requires-python = ">=3.12,<3.13"
 license = "MIT"
 license-files = ["LICENSE"]
 dependencies = [
-    "confuse>=2.0.1,<3.0.0",
+    "networkx>=3.3,<4.0.0",
+    "pandas>=2.2,<3.0.0",
+]
+
+[project.optional-dependencies]
+notebooks = [
     "ipykernel>=6.29,<8.0",
     "jupyter>=1.1,<2.0.0",
     "matplotlib>=3.9,<4.0.0",
-    "networkx>=3.3,<4.0.0",
     "numpy>=1.26,<3.0.0",
-    "pandas>=2.2,<3.0.0",
     "pyarrow>=15,<22.0",
     "pydot>=2.0,<4.0.0",
     "PyYAML>=6.0.2,<7.0.0",
@@ -24,7 +27,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/jmcummings77/polyphasia.git.git"
+Repository = "https://github.com/jmcummings77/polyphasia"
 
 [tool.uv]
 resolution = "lowest-direct"
@@ -33,23 +36,32 @@ resolution = "lowest-direct"
 dev = [
     "black>=24.10,<27.0.0",
     "coverage[toml]>=7.6,<8.0.0",
+    "mypy>=1.13,<3.0",
     "pre-commit>=4.0,<5.0.0",
     "pytest>=8.3,<9.0.0",
-    "pytest-black>=0.6,<1.0.0",
     "pytest-cov>=5.0,<7.0.0",
-    "pytest-faker>=2.0.0,<3.0.0",
-    "pytest-mock>=3.14,<4.0.0",
-    "pytest-mypy>=1.0,<2.0",
 ]
 
 [tool.setuptools.packages.find]
 include = ["polyphasia*"]
 
-[tool.black]
-# The regular expression pattern must be written as a single line;
-# otherwise pytest-black fails to exclude the folders. For details see
-# https://github.com/shopkeep/pytest-black/issues/36
-exclude = '(/(\.git|packaging|testing_framework|.venv|snapshots$|tests/data$)/)'
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.coverage.run]
+source = ["polyphasia"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+disallow_untyped_defs = true
+strict_optional = false
 
 [build-system]
 requires = ["setuptools>=77", "wheel"]

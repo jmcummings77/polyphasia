@@ -279,18 +279,6 @@ wheels = [
 ]
 
 [[package]]
-name = "confuse"
-version = "2.0.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "pyyaml" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/a7/77/05e2284baff5f2106f74b528b9930caf764d6c400733eb42e617c4234a7d/confuse-2.0.1.tar.gz", hash = "sha256:7379a2ad49aaa862b79600cc070260c1b7974d349f4fa5e01f9afa6c4dd0611f", size = 50872 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/32/1f/cf496479814d41fc252004482deeb90b740b4a6a391a3355c0b11d7e0abf/confuse-2.0.1-py3-none-any.whl", hash = "sha256:9b9e5bbc70e2cb9b318bcab14d917ec88e21bf1b724365e3815eb16e37aabd2a", size = 24750 },
-]
-
-[[package]]
 name = "contourpy"
 version = "1.3.3"
 source = { registry = "https://pypi.org/simple" }
@@ -386,18 +374,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/cc/28/c14e053b6762b1044f34a13aab6859bbf40456d37d23aa286ac24cfd9a5d/executing-2.2.1.tar.gz", hash = "sha256:3632cc370565f6648cc328b32435bd120a1e4ebb20c77e3fdde9a13cd1e533c4", size = 1129488 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c1/ea/53f2148663b321f21b5a606bd5f191517cf40b7072c0497d3c92c4a13b1e/executing-2.2.1-py2.py3-none-any.whl", hash = "sha256:760643d3452b4d777d295bb167ccc74c64a81df23fb5e08eff250c425a4b2017", size = 28317 },
-]
-
-[[package]]
-name = "faker"
-version = "40.19.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "tzdata", marker = "sys_platform == 'win32'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/15/01/28c8ddae8caaf82c929655000963d83e3f01265a9af34e823c2ef2eee8ac/faker-40.19.1.tar.gz", hash = "sha256:76fa71fd3bf320db25e5504eb356f9a76b8a95cd6098524d006f446035b6b89d", size = 1969318 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/49/b4/40a1ec12ec834604f3848143343baf1c67bc9a1096e401907eaa0d25876a/faker-40.19.1-py3-none-any.whl", hash = "sha256:265259b37c013838baaae34940207288170df385d6c5281413fce56a3504d580", size = 2007643 },
 ]
 
 [[package]]
@@ -1264,13 +1240,16 @@ name = "polyphasia"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "confuse" },
+    { name = "networkx" },
+    { name = "pandas" },
+]
+
+[package.optional-dependencies]
+notebooks = [
     { name = "ipykernel" },
     { name = "jupyter" },
     { name = "matplotlib" },
-    { name = "networkx" },
     { name = "numpy" },
-    { name = "pandas" },
     { name = "pyarrow" },
     { name = "pydot" },
     { name = "pyyaml" },
@@ -1281,41 +1260,34 @@ dependencies = [
 dev = [
     { name = "black" },
     { name = "coverage" },
+    { name = "mypy" },
     { name = "pre-commit" },
     { name = "pytest" },
-    { name = "pytest-black" },
     { name = "pytest-cov" },
-    { name = "pytest-faker" },
-    { name = "pytest-mock" },
-    { name = "pytest-mypy" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "confuse", specifier = ">=2.0.1,<3.0.0" },
-    { name = "ipykernel", specifier = ">=6.29,<8.0" },
-    { name = "jupyter", specifier = ">=1.1,<2.0.0" },
-    { name = "matplotlib", specifier = ">=3.9,<4.0.0" },
+    { name = "ipykernel", marker = "extra == 'notebooks'", specifier = ">=6.29,<8.0" },
+    { name = "jupyter", marker = "extra == 'notebooks'", specifier = ">=1.1,<2.0.0" },
+    { name = "matplotlib", marker = "extra == 'notebooks'", specifier = ">=3.9,<4.0.0" },
     { name = "networkx", specifier = ">=3.3,<4.0.0" },
-    { name = "numpy", specifier = ">=1.26,<3.0.0" },
+    { name = "numpy", marker = "extra == 'notebooks'", specifier = ">=1.26,<3.0.0" },
     { name = "pandas", specifier = ">=2.2,<3.0.0" },
-    { name = "pyarrow", specifier = ">=15,<22.0" },
-    { name = "pydot", specifier = ">=2.0,<4.0.0" },
-    { name = "pyyaml", specifier = ">=6.0.2,<7.0.0" },
-    { name = "scipy", specifier = ">=1.12,<2.0.0" },
+    { name = "pyarrow", marker = "extra == 'notebooks'", specifier = ">=15,<22.0" },
+    { name = "pydot", marker = "extra == 'notebooks'", specifier = ">=2.0,<4.0.0" },
+    { name = "pyyaml", marker = "extra == 'notebooks'", specifier = ">=6.0.2,<7.0.0" },
+    { name = "scipy", marker = "extra == 'notebooks'", specifier = ">=1.12,<2.0.0" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "black", specifier = ">=24.10,<27.0.0" },
     { name = "coverage", extras = ["toml"], specifier = ">=7.6,<8.0.0" },
+    { name = "mypy", specifier = ">=1.13,<3.0" },
     { name = "pre-commit", specifier = ">=4.0,<5.0.0" },
     { name = "pytest", specifier = ">=8.3,<9.0.0" },
-    { name = "pytest-black", specifier = ">=0.6,<1.0.0" },
     { name = "pytest-cov", specifier = ">=5.0,<7.0.0" },
-    { name = "pytest-faker", specifier = ">=2.0.0,<3.0.0" },
-    { name = "pytest-mock", specifier = ">=3.14,<4.0.0" },
-    { name = "pytest-mypy", specifier = ">=1.0,<2.0" },
 ]
 
 [[package]]
@@ -1462,20 +1434,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pytest-black"
-version = "0.6.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "black" },
-    { name = "pytest" },
-    { name = "toml" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/11/20/b0a2b3e1c09b61831d5c702d9e0579fc935e6a2527ce66dec1ba580a722b/pytest_black-0.6.0.tar.gz", hash = "sha256:ecb77455f379805cb4bd8f45a813a3754c3bbee3199adf1b3665c0dfd086b511", size = 6281 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/da/0f/71303b06ef91f6e9447efb14cc37755b2224ff7109422fef125cb357d7d3/pytest_black-0.6.0-py3-none-any.whl", hash = "sha256:7eb747f54b6c997497b5cbc66a988be114b92016dbfa66d210d1d1f9f6b2dc76", size = 4592 },
-]
-
-[[package]]
 name = "pytest-cov"
 version = "5.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1486,41 +1444,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/74/67/00efc8d11b630c56f15f4ad9c7f9223f1e5ec275aaae3fa9118c6a223ad2/pytest-cov-5.0.0.tar.gz", hash = "sha256:5837b58e9f6ebd335b0f8060eecce69b662415b16dc503883a02f45dfeb14857", size = 63042 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/78/3a/af5b4fa5961d9a1e6237b530eb87dd04aea6eb83da09d2a4073d81b54ccf/pytest_cov-5.0.0-py3-none-any.whl", hash = "sha256:4f0764a1219df53214206bf1feea4633c3b558a2925c8b59f144f682861ce652", size = 21990 },
-]
-
-[[package]]
-name = "pytest-faker"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "faker" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c3/76/1ccba9a1d11a0dd614b31f7160709fe05530ff2823a0ce441063430ad56f/pytest-faker-2.0.0.tar.gz", hash = "sha256:6b37bb89d94f96552bfa51f8e8b89d32addded8ddb58a331488299ef0137d9b6", size = 2784 }
-
-[[package]]
-name = "pytest-mock"
-version = "3.14.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "pytest" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c6/90/a955c3ab35ccd41ad4de556596fa86685bf4fc5ffcc62d22d856cfd4e29a/pytest-mock-3.14.0.tar.gz", hash = "sha256:2719255a1efeceadbc056d6bf3df3d1c5015530fb40cf347c0f9afac88410bd0", size = 32814 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/f2/3b/b26f90f74e2986a82df6e7ac7e319b8ea7ccece1caec9f8ab6104dc70603/pytest_mock-3.14.0-py3-none-any.whl", hash = "sha256:0b72c38033392a5f4621342fe11e9219ac11ec9d375f8e2a0c164539e0d70f6f", size = 9863 },
-]
-
-[[package]]
-name = "pytest-mypy"
-version = "1.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "filelock" },
-    { name = "mypy" },
-    { name = "pytest" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/6b/32/378824e189749d88542f3a68c2c5d2c2c11a2a5d1f7358690249bc684457/pytest_mypy-1.0.0.tar.gz", hash = "sha256:e284a2e8d27bc16a3069c34ab601b2f48fceba9bd435d65f69b7d8f41c373d6e", size = 15877 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/92/1a/4f103f68396860c144dc03f2982721c6ff363ce642bc256451adfe608df0/pytest_mypy-1.0.0-py3-none-any.whl", hash = "sha256:790e52df3e872e0ade7a76cacf7257aae6d093bebab7837024d418fd01c30ccf", size = 8693 },
 ]
 
 [[package]]
@@ -1790,15 +1713,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/7a/fd/7a5ee21fd08ff70d3d33a5781c255cbe779659bd03278feb98b19ee550f4/tinycss2-1.4.0.tar.gz", hash = "sha256:10c0972f6fc0fbee87c3edb76549357415e94548c1ae10ebccdea16fb404a9b7", size = 87085 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e6/34/ebdc18bae6aa14fbee1a08b63c015c72b64868ff7dae68808ab500c492e2/tinycss2-1.4.0-py3-none-any.whl", hash = "sha256:3a49cf47b7675da0b15d0c6e1df8df4ebd96e9394bb905a5775adb0d884c5289", size = 26610 },
-]
-
-[[package]]
-name = "toml"
-version = "0.10.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f", size = 22253 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/44/6f/7120676b6d73228c96e17f1f794d8ab046fc910d781c8d151120c3f1569e/toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b", size = 16588 },
 ]
 
 [[package]]

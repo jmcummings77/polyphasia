@@ -1,11 +1,9 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
 name: Testing
 
 on:
   push:
     branches:
+      - main
       - primary
       - develop
   pull_request:
@@ -26,9 +24,9 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
       - name: Install dependencies
-        run: uv sync --frozen --only-group dev
+        run: uv sync --frozen
       - name: Linting
-        run: uv run pre-commit run --all-files
+        run: uv run --frozen pre-commit run --all-files
 
   Test-Build:
     needs: Linting
@@ -49,6 +47,23 @@ jobs:
         enable-cache: true
         cache-dependency-glob: uv.lock
     - name: Install dependencies
-      run: uv sync --frozen --all-groups
+      run: uv sync --frozen
     - name: Test
-      run: uv run ./run_tests.sh
+      run: uv run --frozen ./run_tests.sh
+    - name: Build distributions
+      run: uv build
+    - name: Smoke test installed wheel outside the checkout
+      run: |
+        cd "$(mktemp -d)"
+        uv run --isolated --no-project --python 3.12 --with "$GITHUB_WORKSPACE"/dist/*.whl python - <<'PY'
+        import os
+        from pathlib import Path
+        from polyphasia.graph import DirectedGraph
+        from polyphasia.loader import clean_data_frame, load_to_pandas
+
+        source = Path(os.environ["GITHUB_WORKSPACE"]) / "examples" / "sample.tsv"
+        graph = DirectedGraph(clean_data_frame(load_to_pandas(source)))
+        assert graph.info == "DiGraph with 4 nodes and 3 edges"
+        assert graph.is_dag
+        assert graph.language_subgraph().number_of_edges() == 3
+        PY

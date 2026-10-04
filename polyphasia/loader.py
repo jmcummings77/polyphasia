@@ -1,5 +1,6 @@
-"""Module with functions for loading and cleaning the source data"""
+"""Load Etymological WordNet TSV files and prepare their edge attributes."""
 
+import csv
 from pathlib import Path
 from typing import Optional
 
@@ -18,86 +19,104 @@ from polyphasia.constants import (
 
 
 def load_to_pandas(source_file: Optional[Path] = None) -> pd.DataFrame:
-    """
-    Parses the provided TSV file to a pandas DataFrame
-    :param source_file: the TSV file from which to load the data
-    :type source_file: Optional[Path]
-    :return: a data frame with the three TSV columns loaded
-    :rtype: pd.DataFrame
+    """Read a headerless UTF-8 TSV with source, relationship, and target columns.
+
+    The default is ``data/raw/etymologies.tsv`` relative to the working directory.
+    Pass an explicit path when calling from notebooks or another directory.
+    Quotes and strings such as ``NA`` are literal data, not CSV quoting or nulls.
+    Empty files return the expected three-column schema. Malformed rows raise
+    ``ValueError``; missing files retain the usual ``FileNotFoundError``.
     """
     if source_file is None:
-        source_file = Path.cwd().parent.absolute() / RELATIVE_PATH_TO_SOURCE
-    data_frame = pd.read_csv(source_file, sep="\t", names=EDGE_LIST_COLUMN_NAMES)
+        source_file = RELATIVE_PATH_TO_SOURCE
+    try:
+        data_frame = pd.read_csv(
+            source_file,
+            sep="\t",
+            header=None,
+            dtype=str,
+            encoding="utf-8",
+            keep_default_na=False,
+            quoting=csv.QUOTE_NONE,
+        )
+    except pd.errors.EmptyDataError:
+        return pd.DataFrame(columns=EDGE_LIST_COLUMN_NAMES)
+    except pd.errors.ParserError as exc:
+        raise ValueError("Expected exactly three tab-separated fields per row") from exc
+    if data_frame.shape[1] != len(EDGE_LIST_COLUMN_NAMES):
+        raise ValueError("Expected exactly three tab-separated fields per row")
+    data_frame.columns = EDGE_LIST_COLUMN_NAMES
+    _validate_columns(data_frame)
     return data_frame
 
 
+def _validate_columns(data_frame: pd.DataFrame) -> None:
+    """Require a nonempty string in each of the three source fields."""
+    missing = set(EDGE_LIST_COLUMN_NAMES).difference(data_frame.columns)
+    if missing:
+        raise ValueError(f"Missing required columns: {', '.join(sorted(missing))}")
+    if not data_frame.columns.is_unique:
+        raise ValueError("Column names must be unique")
+    for column in EDGE_LIST_COLUMN_NAMES:
+        values = data_frame[column]
+        if not values.map(
+            lambda value: isinstance(value, str) and bool(value.strip())
+        ).all():
+            raise ValueError(f"{column} must contain nonempty strings")
+
+
 def clean_data_frame(
-    data_frame: pd.DataFrame, drop_rel_types: Optional[bool] = True
+    data_frame: pd.DataFrame, drop_rel_types: bool = True
 ) -> pd.DataFrame:
+    """Return a cleaned copy with source/target language and word attributes.
+
+    Each endpoint must have the form ``language: word`` with nonempty parts.
+    Split only at the first ``: `` so punctuation and category tags in words
+    are preserved. Invalid endpoints raise ``ValueError``, even in rows that
+    would later be filtered out. Empty inputs retain the full output schema.
+
+    Correct known relationship aliases in ``edge_type`` only. By default keep
+    just ``rel:etymological_origin_of`` and ``rel:has_derived_form`` (root to
+    derivative); set ``drop_rel_types=False`` to retain all relationship types.
+    Neither the caller's data nor its index is modified.
     """
-    # Cleaning notes
+    _validate_columns(data_frame)
+    cleaned = data_frame.copy()
+    edge_type = SourceColumnNames.EDGE_TYPE.value
+    cleaned[edge_type] = cleaned[edge_type].replace(INVALID_RELATIONSHIP_TYPE_MAP)
 
-    ## Relationship types found in source data
-
-    Relationships are recorded bidirectionally. So a root word will link to its derivatives, and each derivative will link back to the root. To simplify the
-    graph, I will drop edges that point from derivatives to roots, since that information is already encoded in the root-to-leaf edge and networkx can handle
-    bidirectional traversal without requiring multiple edges to link the same pair of nodes.
-
-    Below are the types of relationships extracted from the data, with comments indicating their directionality.
-
-
-    <- A is the source of B
-
-    -> B is the source of A
-
-
-    - "rel:etymology"               ->
-    - "rel:etymological_origin_of"  <-
-    - "rel:is_derived_from"         ->
-    - "rel:has_derived_form"        <-
-    - "rel:etymologically_related"  <->
-    - "rel:variant:orthography"     <->
-
-    source data also includes a handful of malformed values, which should be dropped or replaced
-    - "rel:etymologically" -> "rel:etymologically_related"
-    - "rel:derived" -> "rel:is_derived_from"
-
-
-
-    :param data_frame: the data frame to clean
-    :type data_frame: pd.DataFrame
-    :param drop_rel_types: flag indicating whether to drop edges that have unwanted directionality for the analysis
-    :type drop_rel_types: bool
-    :return: a cleaned DataFrame with additional columns for the parsed target and source words and languages
-    :rtype: pd.DataFrame
-    """
+    for node_column, language_column, word_column in (
+        (
+            SourceColumnNames.SOURCE_NODE.value,
+            ParsedColumnNames.SOURCE_LANGUAGE.value,
+            ParsedColumnNames.SOURCE_WORD.value,
+        ),
+        (
+            SourceColumnNames.TARGET_NODE.value,
+            ParsedColumnNames.TARGET_LANGUAGE.value,
+            ParsedColumnNames.TARGET_WORD.value,
+        ),
+    ):
+        parts = (
+            cleaned[node_column]
+            .astype("string")
+            .str.split(LANGUAGE_PREFIX_TAG, n=1, expand=True, regex=False)
+            .reindex(columns=[0, 1])
+            .astype("string")
+        )
+        valid = parts[0].str.fullmatch(r"[^\s:]+", na=False) & (
+            parts[1].str.strip().str.len().fillna(0) > 0
+        )
+        if not valid.all():
+            raise ValueError(
+                f"{node_column} must use 'language: word' with nonempty parts"
+            )
+        cleaned[language_column] = parts[0]
+        cleaned[word_column] = parts[1]
 
     if drop_rel_types:
         from_root_relationships = RELATIONSHIP_TYPE_DIRECTION_MAP[
             EdgeDirections.FROM_ROOT
         ]
-        data_frame = data_frame.loc[
-            (
-                data_frame[SourceColumnNames.EDGE_TYPE.value].isin(
-                    from_root_relationships
-                )
-            )
-        ]
-    else:
-        for rel_type, valid_value in INVALID_RELATIONSHIP_TYPE_MAP.items():
-            data_frame = data_frame.replace(rel_type, valid_value)
-    data_frame[
-        [ParsedColumnNames.SOURCE_LANGUAGE.value, ParsedColumnNames.SOURCE_WORD.value]
-    ] = data_frame.source_node.str.split(LANGUAGE_PREFIX_TAG, expand=True)
-
-    # there are a handful of nodes that include strange characters or a :Category: tag that introduces a third
-    # column for no reason. This data is uninteresting so we can just ignore it and no include it in the graph when we construct it
-    data_frame[
-        [
-            ParsedColumnNames.TARGET_LANGUAGE.value,
-            ParsedColumnNames.TARGET_WORD.value,
-            "_",
-        ]
-    ] = data_frame.target_node.str.split(LANGUAGE_PREFIX_TAG, expand=True)
-    data_frame = data_frame.drop(["_"], axis=1)
-    return data_frame
+        cleaned = cleaned.loc[cleaned[edge_type].isin(from_root_relationships)].copy()
+    return cleaned
